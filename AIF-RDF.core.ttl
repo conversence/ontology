@@ -1,0 +1,451 @@
+@prefix aif: <http://www.arg.dundee.ac.uk/aif#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix www: <http://www.ArgOWL.org#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.arg.dundee.ac.uk/aif>
+    www:createdBy "Floris Bex"^^xsd:string ;
+    a owl:Ontology ;
+    rdfs:comment "A number of argumentation schemes are taken from Bita Banihashemi and Iyad Rahwan's previous version of the AIF ontology."^^xsd:string, "The AIF Ontology. "^^xsd:string ;
+    owl:versionInfo "version 1.0" .
+
+
+
+# Nodes 
+
+aif:Node
+    a owl:Class .
+
+aif:I-node
+    a owl:Class ;
+    rdfs:comment "I-nodes contain information. They can only be connected through an S-node." ;
+    rdfs:subClassOf aif:Node ;
+    owl:disjointWith aif:S-node ;
+    owl:equivalentClass aif:Statement .
+
+aif:Statement
+    a owl:Class ;
+    rdfs:subClassOf owl:Thing, [
+        a owl:Restriction ;
+        owl:onProperty aif:fulfils ;
+        owl:someValuesFrom aif:Statement_Description
+    ] .
+
+aif:NegStatement
+    a owl:Class ;
+    rdfs:subClassOf aif:Statement ;
+    owl:equivalentClass aif:Statement .
+
+aif:Causal_Statement
+    a owl:Class ;
+    rdfs:subClassOf aif:Statement .
+
+aif:S-node
+    a owl:Class ;
+    rdfs:comment "S-nodes specify relations (e.g. conflict, inference, preference) between other nodes. Note that every S-node must be between 2 other nodes, that is, it is impossible to talk about a relation between 2 nodes (an S-node) without specifying these 2 nodes." ;
+    rdfs:subClassOf aif:Node ;
+    owl:equivalentClass aif:Scheme_Application .
+
+aif:Scheme_Application
+    a owl:Class ;
+    rdfs:subClassOf owl:Thing, [
+        a owl:Restriction ;
+        owl:onProperty aif:fulfils ;
+        owl:someValuesFrom aif:Scheme
+    ] ;
+    owl:disjointWith aif:Statement .
+
+aif:RA-node
+    a owl:Class ;
+    rdfs:subClassOf aif:S-node .
+
+aif:Inference
+    a owl:Class ;
+    rdfs:comment "has Exception belongs to Presumptive - Should be considered"^^xsd:string ;
+    rdfs:subClassOf aif:Scheme_Application, [
+        a owl:Restriction ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass aif:Statement ;
+        owl:onProperty aif:hasPremise
+    ], [
+        a owl:Restriction ;
+        owl:onProperty aif:fulfils ;
+        owl:someValuesFrom aif:Inference_Scheme
+    ], [
+        a owl:Restriction ;
+        owl:onClass [
+            a owl:Class ;
+            owl:unionOf (aif:Scheme_Application
+                aif:Statement
+            )
+        ] ;
+        owl:onProperty aif:hasConclusion ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] ;
+    owl:equivalentClass aif:RA-node .
+
+aif:Deductive_Inference
+    a owl:Class ;
+    rdfs:subClassOf aif:Inference .
+
+aif:Presumptive_Inference
+    a owl:Class ;
+    rdfs:subClassOf aif:Inference, [
+        a owl:Restriction ;
+        owl:allValuesFrom aif:Statement ;
+        owl:onProperty aif:hasException
+    ], [
+        a owl:Restriction ;
+        owl:allValuesFrom aif:Statement ;
+        owl:onProperty aif:hasPresumption
+    ] .
+
+aif:CA-node
+    a owl:Class ;
+    rdfs:subClassOf aif:S-node ;
+    owl:equivalentClass aif:Conflict .
+
+aif:Conflict
+    a owl:Class ;
+    rdfs:subClassOf aif:Scheme_Application, [
+        a owl:Restriction ;
+        owl:onClass aif:Statement ;
+        owl:onProperty aif:hasConflictingElement ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ], [
+        a owl:Restriction ;
+        owl:onProperty aif:fulfils ;
+        owl:someValuesFrom aif:Conflict_Scheme
+    ], [
+        a owl:Restriction ;
+        owl:onClass [
+            a owl:Class ;
+            owl:unionOf (aif:Scheme_Application
+                aif:Statement
+            )
+        ] ;
+        owl:onProperty aif:hasConflictedElement ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+aif:PA-node
+    a owl:Class ;
+    rdfs:subClassOf aif:S-node ;
+    owl:equivalentClass aif:Preference .
+
+aif:Preference
+    a owl:Class ;
+    rdfs:subClassOf aif:Scheme_Application, [
+        a owl:Restriction ;
+        owl:onClass [
+            a owl:Class ;
+            owl:unionOf (aif:Scheme_Application
+                aif:Statement
+            )
+        ] ;
+        owl:onProperty aif:hasDispreferredElement ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ], [
+        a owl:Restriction ;
+        owl:onClass [
+            a owl:Class ;
+            owl:unionOf (aif:Scheme_Application
+                aif:Statement
+            )
+        ] ;
+        owl:onProperty aif:hasPreferredElement ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+
+aif:DialogueScheme_Application
+    a owl:Class ;
+    rdfs:subClassOf aif:Scheme_Application .
+
+aif:TA-node
+    a owl:Class ;
+    rdfs:subClassOf aif:S-node ;
+    owl:equivalentClass aif:Transition .
+
+aif:Transition
+    a owl:Class ;
+    rdfs:subClassOf aif:DialogueScheme_Application .
+
+aif:Illocution
+    a owl:Class ;
+    rdfs:subClassOf aif:DialogueScheme_Application ;
+    owl:equivalentClass aif:YA-node .
+
+aif:YA-node
+    a owl:Class ;
+    rdfs:subClassOf aif:S-node .
+
+
+#Schemes
+
+# ... explicit relationship between an actual premise and the generic form (or descriptor) it instantiates 
+# (e.g. that premise ‘Allen is an expert in sport’ instantiates the generic form 
+# ‘Source E is an expert in the subject domain S’).
+# Two distinct types of forms are presented: premise descriptors and conclusion descriptors.
+
+aif:Form
+    a owl:Class .
+
+aif:Statement_Description
+    a owl:Class ;
+    rdfs:subClassOf aif:Form .
+
+aif:Scheme
+    a owl:Class ;
+    rdfs:subClassOf aif:Form ;
+    owl:disjointWith aif:Statement_Description .
+
+aif:Conflict_Scheme
+    a owl:Class ;
+    rdfs:subClassOf aif:Scheme, [
+        a owl:Class ;
+        owl:intersectionOf (aif:Scheme
+            [
+                a owl:Restriction ;
+                owl:onClass [
+                    a owl:Class ;
+                    owl:unionOf (aif:Scheme
+                        aif:Statement_Description
+                    )
+                ] ;
+                owl:onProperty aif:hasConflictedElement_Desc ;
+                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+            ]
+            [
+                a owl:Restriction ;
+                owl:onClass aif:Statement_Description ;
+                owl:onProperty aif:hasConflictingElement_Desc ;
+                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+            ]
+        )
+    ] .
+
+aif:Inference_Scheme
+    a owl:Class ;
+    rdfs:subClassOf aif:Scheme, [
+        a owl:Class ;
+        owl:intersectionOf (aif:Scheme
+            [
+                a owl:Restriction ;
+                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                owl:onClass aif:Statement_Description ;
+                owl:onProperty aif:hasPremise_Desc
+            ]
+            [
+                a owl:Restriction ;
+                owl:onClass [
+                    a owl:Class ;
+                    owl:unionOf (aif:Scheme
+                        aif:Statement_Description
+                    )
+                ] ;
+                owl:onProperty aif:hasConclusion_Desc ;
+                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+            ]
+        )
+    ] .
+
+aif:DeductiveInference_Scheme
+    a owl:Class ;
+    rdfs:subClassOf aif:Inference_Scheme .
+
+aif:Dialogue_Scheme
+    a owl:Class ;
+    rdfs:subClassOf aif:Scheme .
+
+aif:Preference_Scheme
+    a owl:Class ;
+    rdfs:subClassOf aif:Scheme, [
+        a owl:Class ;
+        owl:intersectionOf (aif:Scheme
+            [
+                a owl:Restriction ;
+                owl:onClass [
+                    a owl:Class ;
+                    owl:unionOf (aif:Scheme
+                        aif:Statement_Description
+                    )
+                ] ;
+                owl:onProperty aif:hasDispreferredElement_Desc ;
+                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+            ]
+            [
+                a owl:Restriction ;
+                owl:onClass [
+                    a owl:Class ;
+                    owl:unionOf (aif:Scheme
+                        aif:Statement_Description
+                    )
+                ] ;
+                owl:onProperty aif:hasPreferredElement_Desc ;
+                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+            ]
+        )
+    ] .
+
+aif:PresumptiveInference_Scheme
+    a owl:Class ;
+    rdfs:subClassOf aif:Inference_Scheme, [
+        a owl:Class ;
+        owl:intersectionOf (aif:Inference_Scheme
+            [
+                a owl:Restriction ;
+                owl:allValuesFrom aif:Statement_Description ;
+                owl:onProperty aif:hasException_Desc
+            ]
+            [
+                a owl:Restriction ;
+                owl:allValuesFrom aif:Statement_Description ;
+                owl:onProperty aif:hasPresumption_Desc
+            ]
+        )
+    ] .
+
+aif:Illocutionary_Scheme
+    a owl:Class ;
+    rdfs:subClassOf aif:Dialogue_Scheme .
+
+aif:Transition_Scheme
+    a owl:Class ;
+    rdfs:subClassOf aif:Dialogue_Scheme .
+
+# Properties
+
+aif:argTitle
+    a owl:DatatypeProperty ;
+    rdfs:domain aif:Inference, aif:RA-node ;
+    rdfs:range xsd:string .
+
+aif:authorName
+    a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+aif:claimText
+    a owl:DatatypeProperty ;
+    rdfs:domain aif:Statement ;
+    rdfs:range xsd:string .
+
+aif:createdBy
+    a owl:AnnotationProperty, owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+aif:creationDate
+    a owl:DatatypeProperty ;
+    rdfs:domain aif:Scheme, aif:Scheme_Application ;
+    rdfs:range xsd:date .
+
+aif:formDescription
+    a owl:AnnotationProperty, owl:DatatypeProperty ;
+    rdfs:comment "This is the actual text contained in an I-node or Descriptor"^^xsd:string ;
+    rdfs:domain aif:Statement_Description ;
+    rdfs:range xsd:string .
+
+aif:formName
+    a owl:AnnotationProperty, owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+aif:fulfils
+    a owl:ObjectProperty ;
+    rdfs:domain aif:Node .
+
+aif:hasAcceptBadCase_Premise
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf aif:hasPremise .
+
+aif:hasAcceptableCase_Premise
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf aif:hasPremise .
+
+aif:hasAdequateSearch_Presumption
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf aif:hasPresumption .
+
+aif:hasAlternativeMeans_Exception
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf aif:hasException .
+
+aif:hasArbitraryConditional_Premise
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf aif:hasPremise .
+
+aif:hasArbitraryDefinition_Premise
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf aif:hasPremise .
+
+aif:hasAuthor
+    a owl:FunctionalProperty, owl:ObjectProperty .
+
+aif:hasConclusion
+    a owl:ObjectProperty .
+
+aif:hasConclusion_Desc
+    a owl:ObjectProperty ;
+    rdfs:domain aif:Inference_Scheme .
+
+aif:hasConflictedElement
+    a owl:ObjectProperty .
+
+aif:hasConflictedElement_Desc
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf owl:topObjectProperty .
+
+aif:hasConflictingElement
+    a owl:ObjectProperty .
+
+aif:hasConflictingElement_Desc
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf owl:topObjectProperty .
+
+aif:hasDispreferredElement
+    a owl:ObjectProperty .
+
+aif:hasDispreferredElement_Desc
+    a owl:ObjectProperty ;
+    rdfs:domain aif:Preference_Scheme .
+
+aif:hasException
+    a owl:ObjectProperty ;
+    rdfs:comment ""^^xsd:string ;
+    rdfs:subPropertyOf aif:hasConflictingElement .
+
+aif:hasExceptionSimilarityCase_Exception
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf aif:hasException .
+
+aif:hasException_Desc
+    a owl:ObjectProperty ;
+    rdfs:comment ""^^xsd:string ;
+    rdfs:domain aif:PresumptiveInference_Scheme ;
+    rdfs:subPropertyOf aif:hasConflictingElement_Desc .
+
+aif:hasPreferredElement
+    a owl:ObjectProperty .
+
+aif:hasPreferredElement_Desc
+    a owl:ObjectProperty ;
+    rdfs:domain aif:Preference_Scheme .
+
+aif:hasPremise
+    a owl:ObjectProperty .
+
+aif:hasPremise_Desc
+    a owl:ObjectProperty ;
+    rdfs:domain aif:Inference_Scheme .
+
+aif:hasPresumption
+    a owl:ObjectProperty .
+
+aif:schemeName
+    a owl:AnnotationProperty, owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+xsd:date
+    a rdfs:Datatype .
+

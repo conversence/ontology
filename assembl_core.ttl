@@ -1,0 +1,96 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix sioct: <http://rdfs.org/sioc/types#> .
+@prefix oa: <http://www.openannotation.org/ns/> .
+@prefix pdoa: <http://purl.org/pundit/ont/ao#> .
+@prefix pdao: <http://purl.org/pundit/ont/oa#> .
+@prefix cohere: <http://cohere.open.ac.uk/ontology/cohere.owl#> .
+@prefix dul: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
+@prefix aif: <http://www.arg.dundee.ac.uk/aif#> .
+@prefix idea: <http://purl.org/catalyst/idea#> .
+@prefix ibis: <http://purl.org/catalyst/ibis#> .
+@prefix assembl: <http://purl.org/assembl/core#> .
+
+
+<http://purl.org/assembl/core#>
+    dcterms:description """Notion of assembly, with its phases and forums. Documents, excerpts and concepts."""@en ;
+    dcterms:title "Assembl Core Ontology Namespace"@en ;
+    a owl:Ontology, owl:Thing ;
+    owl:versionInfo "Revision: 0.1" .
+
+assembl:Document a owl:Class;
+    owl:subClassOf sioc:Item, oa:Target, foaf:Document.
+
+assembl:Site
+    a owl:Class;
+    owl:subClassOf sioc:Site.
+
+assembl:Discussion 
+    a owl:Class ;
+    rdfs:comment "A discussion"@en ;
+    rdfs:isDefinedBy <http://purl.org/assembl/core#> ;
+    rdfs:label "Discussion"@en ;
+    rdfs:subClassOf sioc:Container,
+    [
+        a owl:Restriction ;
+        owl:onProperty sioc:has_part ;
+        owl:someValuesFrom sioc:Forum ;
+        owl:someValuesFrom assembl:Ideas 
+    ] . 
+
+assembl:Ideas
+    a owl:Class;
+    rdfs:subClassOf sioc:Container, sioct:ArgumentativeDiscussion,
+    [
+        a owl:Restriction;
+        owl:onProperty sioc:container_of ;
+        owl:allValuesFrom assembl:Idea
+    ].
+
+
+assembl:Post 
+    a owl:Class ;
+    rdfs:comment "A post"@en ;
+    rdfs:isDefinedBy <http://purl.org/assembl/core#> ;
+    rdfs:label "Post"@en ;
+    rdfs:subClassOf sioc:Post, assembl:Document .
+
+assembl:Idea
+    a owl:Class ;
+    rdfs:comment "An idea"@en ;
+    rdfs:isDefinedBy <http://purl.org/assembl/core#> ;
+    rdfs:label "Idea"@en ;
+    rdfs:subClassOf sioc:Item, idea:GenericIdea. # , owl:Thing , dul:Entity, cohere:abstract_object, aif:Node, cohere:abstract_idea?, aif:I-node? skos:Concept??
+
+assembl:ExcerptTarget a owl:Class;
+    rdfs:comment "A fragment of an item or document."@en;
+    rdfs:subClassOf oa:SpecificResource.
+
+assembl:Excerpt a owl:Class;
+    rdfs:comment "A reference to a fragment of an item or document."@en;
+    rdfs:subClassOf oa:Annotation.
+
+assembl:relevantToDiscussion a owl:ObjectProperty ;
+    rdfs:domain assembl:Excerpt ;
+    rdfs:range assembl:Discussion;
+    rdfs:label "relevant to discussion"@en;
+    rdfs:label "pertinent à la discussion"@fr;
+    rdfs:subPropertyOf pdoa:isRelatedTo .
+
+assembl:expressesIdea a owl:ObjectProperty ;
+    rdfs:domain assembl:Excerpt ;
+    rdfs:range assembl:Idea;
+    rdfs:label "expresses the idea"@en;
+    rdfs:label "exprime l'idée"@fr;
+    rdfs:subPropertyOf pdoa:isRelatedTo .
+
+assembl:db_id a owl:LiteralProperty.
+
+assembl:link_order a owl:LiteralProperty;
+    rdfs:domain idea:IdeaRelation;
+    rdfs:range xsd:number.

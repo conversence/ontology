@@ -1,0 +1,201 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix pa_ibis: <http://privatealpha.com/ontology/ibis/1#> .
+@prefix aif: <http://www.arg.dundee.ac.uk/aif#> .
+@prefix idea: <http://purl.org/catalyst/idea#> .
+@prefix ibis: <http://purl.org/catalyst/ibis#> .
+
+<http://purl.org/catalyst/ibis#> a owl:Ontology.
+
+ibis:Issue
+    a owl:Class;
+    rdfs:subClassOf idea:Question;
+    owl:equivalentClass pa_ibis:Issue.
+
+ibis:Position
+    a owl:Class;
+    rdfs:subClassOf idea:GenericIdea, aif:Statement;
+    owl:equivalentClass pa_ibis:Position.
+    # Should we still call it Option?
+
+ibis:Argument
+    a owl:Class;
+    rdfs:subClassOf idea:GenericIdea, aif:Statement;
+    # it is part of Preference scheme, but a statement on its own.
+    owl:equivalentClass pa_ibis:Argument.
+
+ibis:Map
+    a owl:Class;
+    rdfs:subClassOf idea:GenericIdea.
+    # Positional. We could just infer from in_map. Also, multiple inheritance with I-O-A.
+
+ibis:Reference
+    a owl:Class;
+    rdfs:subClassOf idea:GenericIdea, aif:Statement.
+
+
+ibis:Decision
+    a owl:Class;
+    rdfs:subClassOf idea:GenericIdea, aif:DialogueScheme_Application. # and Preference?
+    # Decision --relevant to-->Issue, Decision--hasConclusion-->Position
+
+ibis:PositionRespondsToIssue
+    a owl:Class;
+    rdfs:subClassOf idea:DirectedIdeaRelation, idea:MutualRelevanceStatement.
+
+ibis:response_position
+    rdfs:subPropertyOf idea:source_idea;
+    rdfs:domain ibis:PositionRespondsToIssue;
+    rdfs:range ibis:Position.
+
+ibis:response_issue
+    rdfs:subPropertyOf idea:target_idea;
+    rdfs:domain ibis:PositionRespondsToIssue;
+    rdfs:range ibis:Issue.
+
+pa_ibis:responds-to owl:equivalentProperty [owl:propertyChainAxiom ([owl:inverseOf ibis:response_position] ibis:response_issue)].
+
+# pa_ibis:supports a->p
+# pa_ibis:opposes a->p
+
+ibis:ArgumentApplication
+    a owl:Class;
+    rdfs:subClassOf idea:DirectedIdeaRelation, idea:MutualRelevanceStatement.
+
+ibis:argument_arguing
+    rdfs:subPropertyOf aif:source_idea;
+    rdfs:domain ibis:ArgumentApplication;
+    rdfs:range ibis:Argument.
+
+ibis:position_argued
+    rdfs:subPropertyOf aif:target_idea;
+    rdfs:domain ibis:ArgumentApplication;
+    rdfs:range ibis:Position.
+
+
+ibis:ArgumentSupportsPosition
+    a owl:Class;
+    rdfs:subClassOf ibis:ArgumentApplication.
+
+ibis:argument_supporting
+    rdfs:subPropertyOf ibis:argument_arguing;
+    rdfs:domain ibis:ArgumentSupportsPosition.
+
+ibis:position_supported
+    rdfs:subPropertyOf ibis:position_argued;
+    rdfs:domain ibis:ArgumentSupportsPosition.
+
+pa_ibis:supports owl:equivalentProperty [owl:propertyChainAxiom ([owl:inverseOf ibis:argument_supporting] ibis:position_supported)].
+
+ibis:ArgumentOpposesPosition
+    a owl:Class;
+    rdfs:subClassOf ibis:ArgumentApplication.
+
+ibis:position_opposed
+    rdfs:subPropertyOf ibis:position_argued;
+    rdfs:domain ibis:ArgumentOpposesPosition.
+
+ibis:argument_opposing
+    rdfs:subPropertyOf ibis:argument_arguing;
+    rdfs:domain ibis:ArgumentOpposesPosition.
+
+pa_ibis:opposes owl:equivalentProperty [owl:propertyChainAxiom ([owl:inverseOf ibis:argument_opposing] ibis:position_opposed)].
+
+
+# Questions
+
+ibis:IssueQuestions
+    a owl:Class;
+    rdfs:subClassOf idea:DirectedIdeaRelation, idea:MutualRelevanceStatement.
+
+ibis:issue_questioning
+    rdfs:subPropertyOf idea:source_idea;
+    rdfs:domain ibis:IssueQuestions;
+    rdfs:range ibis:Issue.
+
+ibis:questioned_by_issue
+    rdfs:subPropertyOf idea:target_idea;
+    rdfs:domain ibis:IssueQuestions;
+    rdfs:range idea:GenericIdea. 
+    #[owl:unionOf (ibis:Position ibis:Argument ibis:Issue)].
+
+pa_ibis:questions owl:equivalentProperty [owl:propertyChainAxiom (
+        [owl:inverseOf ibis:issue_questioning] ibis:questioned_by_issue)].
+
+#suggests
+
+ibis:SuggestsIssue
+    a owl:Class;
+    rdfs:subClassOf idea:DirectedIdeaRelation, idea:MutualRelevanceStatement.
+
+ibis:suggesting_issue
+    rdfs:subPropertyOf idea:source_idea;
+    rdfs:domain ibis:SuggestsIssue;
+    rdfs:range idea:GenericIdea.
+    #[owl:unionOf (ibis:Position ibis:Argument ibis:Issue)].
+
+ibis:issue_suggested
+    rdfs:subPropertyOf idea:target_idea;
+    rdfs:domain ibis:SuggestsIssue;
+    rdfs:range ibis:Issue.
+
+pa_ibis:suggests owl:equivalentProperty [owl:propertyChainAxiom (
+        [owl:inverseOf ibis:suggesting_issue] ibis:issue_suggested)].
+
+
+#map 
+
+# The map inclusion may not be referenced. Not clear that we need a reified relation here.
+
+ibis:inMap
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:includes;
+    rdfs:range ibis:Map.
+
+# IBIS Extension for Mark: Criterion. Also links with aif PreferenceScheme, which is lovely.
+
+ibis:Criterion
+    a owl:Class;
+    rdfs:subClassOf aif:PreferenceScheme, [
+        a owl:Restriction ;
+        owl:onProperty aif:relevantTo ;
+        owl:someValuesFrom ibis:Issue
+    ].
+
+ibis:CriterionApplication
+    a owl:Class;
+    rdfs:subClassOf aif:Preference, [
+        a owl:Restriction ;
+        owl:onProperty aif:fulfils ;
+        owl:someValuesFrom aif:Criterion
+    ], [
+        a owl:Restriction ;
+        owl:onProperty idea:hasPart ;
+        owl:someValuesFrom ibis:ArgumentOpposesPosition;
+        owl:someValuesFrom ibis:ArgumentSupportsPosition
+    ].
+
+ibis:argumentAdressesCriterion
+    rdfs:domain idea:Argument;
+    rdfs:range ibis:Criterion;
+    owl:propertyChainAxiom  ( idea:hasPart  aif:fulfils ) .
+    # AND the intermediate step is a CriterionApplication. Not sure how to say that in OWL.
+
+ibis:criterionSupports
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf aif:hasPreferredElement;
+    rdfs:domain ibis:CriterionApplication;
+    rdfs:range ibis:Position;
+    owl:propertyChainAxiom (idea:hasPart ibis:position_supported).
+
+ibis:criterionOpposes
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf aif:hasDispreferredElement;
+    rdfs:domain ibis:CriterionApplication;
+    rdfs:range ibis:Position;
+    owl:propertyChainAxiom (idea:hasPart ibis:position_opposed).
+
