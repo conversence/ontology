@@ -4,7 +4,7 @@
 # https://github.com/RDFLib/rdflib (pip install rdflib)
 # https://github.com/digitalbazaar/pyld (pip install pyld)
 
-dotfiles = ibis.dot version.dot aif.dot vote.dot sioc.dot idea.dot assembl.dot ibis_idea.dot ibis_aif.dot ibis_pa.dot
+dotfiles = ibis.dot version.dot aif.dot vote.dot sioc.dot idea.dot assembl.dot ibis_idea.dot ibis_aif.dot ibis_pa.dot catalyst_core.dot
 sourcefiles = version.ttl assembl_core.ttl catalyst_idea.ttl AIF-RDF.core.ttl pa_ibis.ttl sioc.ttl foaf.ttl catalyst_ibis.ttl catalyst_vote.ttl catalyst_core.ttl
 pdf_files  := $(subst .dot,.pdf,$(dotfiles))
 
@@ -32,8 +32,8 @@ vote.dot: catalyst_vote.ttl
 assembl.dot: assembl_core.ttl
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns assembl --files $(sourcefiles)
 
-catalystcore.dot: catalyst_core.ttl
-	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns assembl --files $(sourcefiles)
+catalyst_core.dot: catalyst_core.ttl
+	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns catalyst --files $(sourcefiles)
 
 
 version.dot: version.ttl
