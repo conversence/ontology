@@ -93,14 +93,12 @@ catalyst:relevantToDiscussion a owl:ObjectProperty ;
     rdfs:domain catalyst:Excerpt ;
     rdfs:range catalyst:Discussion;
     rdfs:label "relevant to discussion"@en;
-    rdfs:label "pertinent à la discussion"@fr;
     rdfs:subPropertyOf pdoa:isRelatedTo .
 
 catalyst:expressesIdea a owl:ObjectProperty ;
     rdfs:domain catalyst:Excerpt ;
     rdfs:range catalyst:Idea;
     rdfs:label "expresses the idea"@en;
-    rdfs:label "exprime l'idée"@fr;
     rdfs:subPropertyOf pdoa:isRelatedTo .
 
 catalyst:data_graph
