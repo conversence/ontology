@@ -46,7 +46,7 @@ eg_site:user_benoitg a sioc:UserAccount;
 }
 
 <http://www.assembl.net/discussion/1/> a catalyst:Discussion;
-    # To a non-assembl-aware tool, this is just a sioc:Container.
+    # To a non-catalyst-aware tool, this is a sioc:Container and sioc:Space.
     catalyst:pseudonymization_graph <http://www.assembl.net/discussion/1/pseudonyms>;
     catalyst:data_graph <http://www.assembl.net/discussion/1/data>.
 
@@ -84,6 +84,9 @@ eg_d1:ideas a catalyst:Ideas ;
 eg_d1:d1_participants a catalyst:Participants;
     sioc:has_member eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36,
         eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2.
+
+eg_d1:d1_member a sioc:Role;
+    sioc:has_scope <http://www.assembl.net/discussion/1/> .
 
 eg_d1:d1_mailingList1 a assembl:MailingList, sioc:Space.
 
