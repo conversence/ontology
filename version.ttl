@@ -7,6 +7,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix sioc: <http://rdfs.org/sioc/ns#> .
 @prefix assembl: <http://purl.org/assembl/core#> .
+@prefix catalyst: <http://purl.org/catalyst/core#> .
 @prefix version: <http://purl.org/catalyst/version#> .
 
 <http://purl.org/catalyst/version#> a owl:Ontology;
@@ -29,6 +30,9 @@ version:what
     a owl:FunctionalProperty;
     owl:subPropertyOf version:affected_object;
     rdfs:domain version:Operation.
+
+version:operations a owl:ObjectProperty;
+    owl:inverseOf version:what.
 
 version:revision
     a owl:DatatypeProperty, owl:FunctionalProperty;
@@ -64,6 +68,13 @@ version:Update
     a owl:Class;
     owl:subClassOf version:Operation.
 
+version:updated_value a owl:ObjectProperty;
+    rdfs:domain version:Update;
+    rdfs:range rdf:Statement;
+    rdfs:comment "Optional. Updates can have either updated_values or a snapshot (see later.)"@eng.
+
+rdf:subject owl:propertyChainAxiom ([owl:inverseOf version:updated_value] version:what).
+
 version:PerUserUpdate 
     a owl:Class;
     owl:subClassOf version:Update.
@@ -89,11 +100,13 @@ version:StateChange
 version:affected_state
     a owl:ObjectProperty;
     rdfs:domain version:StateChange;
-    rdfs:range rdf:Property.
+    rdfs:range rdf:Property;
+    owl:propertyChainAxiom (version:updated_value rdf:property).
 
-version:state_transition
-    a owl:ObjectProperty;
-    rdfs:domain version:StateChange.
+version:ClassChange
+    a owl:Class;
+    owl:subClassOf version:Update;
+    rdfs:comment "All updated values objects must be classes. All classes not mentioned in an update value object are erased."@eng.
 
 version:ApprovalChange
     a owl:Class;
@@ -157,7 +170,7 @@ version:snapshot_of
 version:has_snapshot
     a owl:ObjectProperty;
     owl:inverseOf version:snapshot_of;
-    owl:propertyChainAxiom ([owl:inverseOf version:what] version:target_snapshot).
+    owl:propertyChainAxiom (version:operations version:target_snapshot).
 
 version:previous_snapshot
     a owl:ObjectProperty;
@@ -169,10 +182,5 @@ version:tombstone
     a owl:ObjectProperty;
     rdfs:domain version:Delete;
     rdfs:range version:Tombstone.
-
-version:updated_value a owl:ObjectProperty;
-    rdfs:domain version:Update;
-    rdfs:range rdf:Statement;
-    rdfs:comment "Updates can have either updated_values or a snapshot."@eng.
 
 rdf:Statement a owl:Class.

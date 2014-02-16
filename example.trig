@@ -9,6 +9,7 @@
 @prefix oa: <http://www.openannotation.org/ns/> .
 @prefix idea: <http://purl.org/catalyst/idea#> .
 @prefix ibis: <http://purl.org/catalyst/ibis#> .
+@prefix catalyst: <http://purl.org/catalyst/core#> .
 @prefix assembl: <http://purl.org/assembl/core#> .
 @prefix version: <http://purl.org/catalyst/version#> .
 @prefix vote: <http://purl.org/catalyst/vote#> .
@@ -18,19 +19,13 @@
 
 # A site, with a forum and a user.
 
-<http://www.assembl.net> a sioc:Site ;
+<http://www.assembl.net> a catalyst:Site ;
+    sioc:space_of <http://www.assembl.net/discussion/1/>;
     sioc:host_of eg_d1:forum.
-    # Note: should be the whole discussion.
 
-<http://www.assembl.net/discussion/1/> a assembl:Discussion .
-    # To a non-assembl-aware tool, this is just a sioc:Container.
+<http://www.assembl.net/> catalyst:user_graph <http://www.assembl.net/users/>.
 
-eg_d1:forum a sioc:Forum ;
-    dcterms:isPartOf <http://www.assembl.net/discussion/1/> .
-
-eg_d1:ideas a assembl:Ideas ;
-    dcterms:isPartOf <http://www.assembl.net/discussion/1/> .
-    # To a non-assembl-aware tool, this is just another sioc:Container.
+<http://www.assembl.net/users/> = {
 
 eg_site:agent_benoitg a foaf:Person;
     foaf:familyName "Grégoire";
@@ -44,21 +39,71 @@ eg_site:user_maparent a sioc:UserAccount;
     sioc:account_of eg_site:agent_maparent;
     sioc:email "maparent@acm.org".
 
+eg_site:user_benoitg a sioc:UserAccount;
+    sioc:account_of eg_site:agent_benoitg;
+    sioc:email "benoitg@coeus.com".
+
+}
+
+<http://www.assembl.net/discussion/1/> a catalyst:Discussion;
+    # To a non-assembl-aware tool, this is just a sioc:Container.
+    catalyst:pseudonymization_graph <http://www.assembl.net/discussion/1/pseudonyms>;
+    catalyst:data_graph <http://www.assembl.net/discussion/1/data>.
+
+# This graph would not be public
+
+<http://www.assembl.net/discussion/1/pseudonyms> = {
+    eg_d1:pseudo_c371ca84d91eb13f3ea610855d417db0a13dd082 a foaf:Person;
+        owl:sameAs eg_site:agent_benoitg.
+    eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36 a sioc:UserAccount;
+        sioc:account_of eg_d1:pseudo_c371ca84d91eb13f3ea610855d417db0a13dd082;
+        owl:sameAs eg_site:user_benoitg.
+    eg_d1:pseudo_21ddd0f62e22ddab75c6e9fa92fda056e65dc0ac a foaf:Person;
+        owl:sameAs eg_site:agent_maparent.
+    eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2 a sioc:UserAccount;
+        sioc:account_of eg_d1:pseudo_21ddd0f62e22ddab75c6e9fa92fda056e65dc0ac;
+        owl:sameAs eg_site:user_maparent.
+}
+
+
+<http://www.assembl.net/discussion/1/data> = {
+
+<http://www.assembl.net/discussion/1/> 
+    dcterms:hasPart eg_d1:forum, eg_d1:ideas;
+    catalyst:participants eg_d1:d1_participants;
+    catalyst:uses_source eg_d1:mailingList1;
+    version:history_graph <http://www.assembl.net/discussion/1/archive>.
+
+eg_d1:forum a sioc:Forum ;
+    dcterms:isPartOf <http://www.assembl.net/discussion/1/> .
+
+eg_d1:ideas a catalyst:Ideas ;
+    dcterms:isPartOf <http://www.assembl.net/discussion/1/> .
+    # To a non-assembl-aware tool, this is just another sioc:Container.
+
+eg_d1:d1_participants a catalyst:Participants;
+    sioc:has_member eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36,
+        eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2.
+
+eg_d1:d1_mailingList1 a assembl:MailingList, sioc:Space.
+
 # A post
 
 eg_d1:message_1 a sioc:Post ;
     dcterms:created "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
     dcterms:title "Climate change is a real problem"@eng;
     sioc:content """We need to reduce CO2 levels."""@eng;
-    sioc:has_creator eg_site:user_maparent;
+    sioc:has_creator eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
     sioc:addressed_to "discussion1@assembl.net";
-    sioc:has_container eg_d1:forum.
+    sioc:has_container eg_d1:forum;
+    assembl:has_origin eg_d1:d1_mailingList1.
 
 eg_d1:message_2 a sioc:Post ;
     dcterms:title "Telecommuting might help"@eng;
-    sioc:has_creator eg_site:user_benoitg;
-    sioc:addressed_to eg_site:user_maparent;
+    sioc:has_creator eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36;
+    sioc:addressed_to eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
     sioc:has_container eg_d1:forum;
+    assembl:has_origin eg_d1:d1_mailingList1;
     sioc:reply_of eg_d1:message_1.
 
 
@@ -83,7 +128,7 @@ eg_site:annotation_1_target a trig:Graph.
 # The annotation body (a named graph) links the text extract to an idea.
 
 eg_site:annotation_1_target = {
-    eg_d1:extracts_1 assembl:expressesIdea eg_d1:idea_1.
+    eg_d1:extracts_1 catalyst:expressesIdea eg_d1:idea_1.
 }
 
 # NOTE : We may also add the triple directly to the graph.
@@ -93,22 +138,22 @@ eg_site:annotation_1_target = {
 
 # A few ideas.
 
-eg_d1:idea_1 a ibis:Issue, idea:GenericIdea;
+eg_d1:idea_1 a ibis:Issue, idea:GenericIdeaNode;
     dcterms:title "Stop climate change"@eng;
     dcterms:description "A longer description "@eng;
-    sioc:has_creator eg_site:user_maparent;
+    sioc:has_creator eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
     dcterms:created "2013-11-02T14:20:04"^^xsd:dateTimeStamp;
     dcterms:modified "2014-01-02T11:32:17"^^xsd:dateTimeStamp;
     sioc:has_container eg_d1:ideas.
 
-eg_d1:idea_2 a ibis:Position, idea:GenericIdea;
+eg_d1:idea_2 a ibis:Position, idea:GenericIdeaNode;
     dcterms:title "We should telecommute"@eng.
 
 eg_d1:idealink_2_1 a ibis:PositionRespondsToIssue;
     ibis:response_position eg_d1:idea_2;
     ibis:response_issue eg_d1:idea_1.
 
-eg_d1:idea_3 a ibis:Argument, idea:GenericIdea;
+eg_d1:idea_3 a ibis:Argument, idea:GenericIdeaNode;
     dcterms:title """Personal transport is a big part 
         of fuel consumption."""@eng.
 
@@ -119,7 +164,7 @@ eg_d1:idealink_3_2 a ibis:ArgumentSupportsPosition;
 # Vote
 
 eg_d1:vote1 a vote:BinaryVote;
-    vote:voter eg_site:agent_johnsmith;
+    vote:voter eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36;
     dcterms:created "2013-11-02T14:20:04"^^xsd:dateTimeStamp;
     vote:subject eg_d1:idea_3;
     vote:positive "true"^^xsd:boolean.
@@ -129,75 +174,75 @@ eg_d1:vote_range a vote:LickertRange;
     vote:max "10"^^xsd:integer.
 
 eg_d1:vote2 a vote:LickertVote;
-    vote:voter eg_site:agent_johnsmith;
+    vote:voter eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36;
     vote:subject eg_d1:idea_3;
     vote:lickert_in_range eg_d1:vote_range;
     vote:lickert_value "8"^^xsd:integer.
 
 eg_d1:vote3 a vote:OrderingVote;
-    vote:voter eg_site:agent_johnsmith;
+    vote:voter eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36;
     vote:ordered_ideas [ a rdf:Seq;
         rdf:_1 eg_d1:idea3;
         rdf:_2 eg_d1:idea5;
         rdf:_3 eg_d1:idea4 ].
 
+}
+
 # History
 
-<http://www.assembl.net/discussion/1/> version:history_graph <http://www.assembl.net/archive/1/>.
-
-<http://www.assembl.net/archive/1/> = {
+<http://www.assembl.net/discussion/1/archive> = {
 
     eg_d1:event1
         a version:Create;
         version:what eg_d1:message_1;
-        version:who eg_site:user_maparent;
+        version:who eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
         version:revision "0"^^xsd:integer;
         version:when "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
         version:snapshot [
             a sioc:Post, version:ObjectSnapshot ;
             dcterms:created "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
-            dcterms:title "Let's discuss IBIS"@eng;
-            sioc:content """This was the initial text of the post."""@eng;
-            sioc:has_creator eg_site:user_maparent;
+            dcterms:title "Climate change is a problem"@eng;
+            sioc:content """Let's do something draft placeholder"""@eng;
+            sioc:has_creator eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
             sioc:has_container eg_d1:forum;
             version:snapshot_of eg_d1:message_1
         ].
     eg_d1:event2
         a version:Update;
         version:what eg_d1:message_1;
-        version:who eg_site:user_maparent;
+        version:who eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
         version:revision "1"^^xsd:integer;
         version:when "2013-11-01T09:12:15"^^xsd:dateTimeStamp;
         version:updated_value [
             a rdf:Statement;
             rdf:subject eg_d1:message_1;
             rdf:predicate dcterms:title;
-            rdf:object "Let's discuss IBIS in RDF"@eng
+            rdf:object "Climate change is a real problem"@eng
         ];
         version:updated_value [
             a rdf:Statement;
             rdf:subject eg_d1:message_1;
             rdf:predicate sioc:content;
-            rdf:object "A more elaborate description"@eng
+            rdf:object "We need to reduce CO2 levels."@eng
         ].
     eg_d1:event3
         a version:ReadStatusChange;
-        version:who eg_site:user_benoitg;
+        version:who eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36;
         version:what eg_d1:message_1;
         version:revision "2"^^xsd:integer;
         version:when "2013-11-02T11:00:01"^^xsd:dateTimeStamp.
     eg_d1:event4
         a version:Delete;
-        version:who eg_site:user_maparent;
+        version:who eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
         version:what eg_d1:message_1;
         version:revision "3"^^xsd:integer;
         version:when "2013-11-03T11:00:01"^^xsd:dateTimeStamp;
         version:tombstone [
             a sioc:Post, version:Tombstone ;
             dcterms:created "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
-            dcterms:title "Let's discuss IBIS in RDF"@eng;
-            sioc:content """A more elaborate description"""@eng;
-            sioc:has_creator eg_site:user_maparent;
+            dcterms:title "Climate change is a real problem"@eng;
+            sioc:content """We need to reduce CO2 levels."""@eng;
+            sioc:has_creator eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
             sioc:has_container eg_d1:forum;
             version:snapshot_of eg_d1:message_1
         ].

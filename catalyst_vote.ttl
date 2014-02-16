@@ -7,6 +7,7 @@
 @prefix pa_ibis: <http://privatealpha.com/ontology/ibis/1#> .
 @prefix aif: <http://www.arg.dundee.ac.uk/aif#> .
 @prefix idea: <http://purl.org/catalyst/idea#> .
+@prefix catalyst: <http://purl.org/catalyst/core#> .
 @prefix vote: <http://purl.org/catalyst/vote#> .
 
 <http://purl.org/catalyst/vote#> a owl:Ontology.
@@ -23,7 +24,9 @@ vote:voter a owl:ObjectProperty;
     rdfs:domain vote:Vote;
     rdfs:range foaf:Agent.
 
-vote:BinaryVote owl:subClassOf vote:Vote.
+vote:BinaryVote
+    a owl:Class;
+    owl:subClassOf vote:Vote.
 
 vote:positive a owl:DataProperty;
     rdfs:domain vote:BinaryVote;
@@ -37,7 +40,8 @@ vote:max a owl:DataProperty;
     rdfs:domain vote:LickertRange;
     rdfs:range xsd:integer.
 
-vote:LickertVote owl:subClassOf vote:Vote.
+vote:LickertVote a owl:Class;
+    owl:subClassOf vote:Vote.
 vote:lickert_in_range a owl:ObjectProperty;
     rdfs:domain vote:LickertVote;
     rdfs:range vote:LickertRange.
@@ -45,7 +49,7 @@ vote:lickert_value a owl:DataProperty;
     rdfs:domain vote:LickertVote;
     rdfs:range xsd:integer.
 
-vote:OrderingVote 
+vote:OrderingVote a owl:Class;
     owl:subClassOf vote:Vote.
 
 vote:ordered_ideas a owl:ObjectProperty;

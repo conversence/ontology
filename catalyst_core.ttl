@@ -1,0 +1,133 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix trig: <http://www.w3.org/2004/03/trix/rdfg-1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix sioct: <http://rdfs.org/sioc/types#> .
+@prefix oa: <http://www.openannotation.org/ns/> .
+@prefix pdoa: <http://purl.org/pundit/ont/ao#> .
+@prefix pdao: <http://purl.org/pundit/ont/oa#> .
+@prefix cohere: <http://cohere.open.ac.uk/ontology/cohere.owl#> .
+@prefix dul: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
+@prefix aif: <http://www.arg.dundee.ac.uk/aif#> .
+@prefix idea: <http://purl.org/catalyst/idea#> .
+@prefix catalyst: <http://purl.org/catalyst/core#> .
+@prefix ibis: <http://purl.org/catalyst/ibis#> .
+
+
+<http://purl.org/catalyst/core#>
+    dcterms:description """The basic components of a discussion."""@en ;
+    dcterms:title "Catalyst Core Ontology Namespace"@en ;
+    a owl:Ontology, owl:Thing ;
+    owl:versionInfo "Revision: 0.1" .
+
+catalyst:Item a owl:Class;
+    owl:subClassOf sioc:Item, oa:Target, foaf:Document.
+
+catalyst:Site
+    a owl:Class;
+    owl:subClassOf sioc:Site.
+
+catalyst:Discussion 
+    a owl:Class ;
+    rdfs:comment "A discussion"@en ;
+    rdfs:isDefinedBy <http://purl.org/catalyst/core#> ;
+    rdfs:label "Discussion"@en ;
+    owl:subClassOf sioc:Container, sioc:Space,
+    [
+        a owl:Restriction ;
+        owl:onProperty sioc:has_part ;
+        owl:someValuesFrom catalyst:Ideas 
+    ] . 
+
+catalyst:Ideas
+    a owl:Class;
+    owl:subClassOf sioc:Container, sioct:ArgumentativeDiscussion,
+    [
+        a owl:Restriction;
+        owl:onProperty sioc:container_of ;
+        owl:allValuesFrom catalyst:GenericIdea
+    ].
+
+catalyst:ParticipantGroup
+    a owl:Class;
+    owl:subClassOf sioc:Usergroup.
+
+catalyst:participants
+    a owl:ObjectProperty;
+    owl:subPropertyOf sioc:has_usergroup;
+    owl:domain catalyst:Discussion;
+    owl:range catalyst:ParticipantGroup.
+
+catalyst:uses_source
+    a owl:ObjectProperty;
+    owl:domain catalyst:Discussion;
+    owl:range sioc:Space.
+
+catalyst:Post 
+    a owl:Class ;
+    rdfs:comment "A post"@en ;
+    rdfs:isDefinedBy <http://purl.org/catalyst/core#> ;
+    rdfs:label "Post"@en ;
+    owl:subClassOf sioc:Post, sioc:Item .
+
+catalyst:Idea
+    a owl:Class ;
+    rdfs:comment "An idea"@en ;
+    rdfs:isDefinedBy <http://purl.org/catalyst/core#> ;
+    rdfs:label "Idea"@en ;
+    owl:subClassOf sioc:Item, idea:GenericIdea. # , owl:Thing , dul:Entity, cohere:abstract_object, aif:Node, cohere:abstract_idea?, aif:I-node? skos:Concept??
+
+catalyst:ExcerptTarget a owl:Class;
+    rdfs:comment "A fragment of an item or document."@en;
+    owl:subClassOf oa:SpecificResource.
+
+catalyst:Excerpt a owl:Class;
+    rdfs:comment "A reference to a fragment of an item or document."@en;
+    owl:subClassOf oa:Annotation.
+
+catalyst:relevantToDiscussion a owl:ObjectProperty ;
+    rdfs:domain catalyst:Excerpt ;
+    rdfs:range catalyst:Discussion;
+    rdfs:label "relevant to discussion"@en;
+    rdfs:label "pertinent à la discussion"@fr;
+    rdfs:subPropertyOf pdoa:isRelatedTo .
+
+catalyst:expressesIdea a owl:ObjectProperty ;
+    rdfs:domain catalyst:Excerpt ;
+    rdfs:range catalyst:Idea;
+    rdfs:label "expresses the idea"@en;
+    rdfs:label "exprime l'idée"@fr;
+    rdfs:subPropertyOf pdoa:isRelatedTo .
+
+catalyst:data_graph
+    a owl:ObjectProperty;
+    owl:domain catalyst:Discussion;
+    owl:range trig:Graph.
+
+catalyst:user_graph
+    a owl:ObjectProperty;
+    owl:domain catalyst:Site;
+    owl:range trig:Graph.
+
+catalyst:pseudonymization_graph
+    a owl:ObjectProperty;
+    owl:domain catalyst:Discussion;
+    owl:range trig:Graph.
+
+
+catalyst:PseudonymAccount
+    a owl:Class;
+    owl:subClassOf sioc:UserAccount.
+
+catalyst:PseudonymAgent
+    a owl:Class;
+    owl:subClassOf foaf:Agent.
+
+catalyst:pseudonym_scope
+    a owl:ObjectProperty;
+    rdfs:domain [owl:unionOf (catalyst:PseudonymAgent catalyst:PseudonymAccount)];
+    rdfs:range catalyst:Discussion.

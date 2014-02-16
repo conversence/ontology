@@ -4,8 +4,8 @@
 # https://github.com/RDFLib/rdflib (pip install rdflib)
 # https://github.com/digitalbazaar/pyld (pip install pyld)
 
-dotfiles = ibis.dot version.dot aif.dot vote.dot sioc.dot idea.dot assembl.dot ibis_idea.dot
-sourcefiles = version.ttl assembl_core.ttl catalyst_idea.ttl AIF-RDF.core.ttl pa_ibis.ttl sioc.ttl foaf.ttl catalyst_ibis.ttl catalyst_vote.ttl
+dotfiles = ibis.dot version.dot aif.dot vote.dot sioc.dot idea.dot assembl.dot ibis_idea.dot ibis_aif.dot ibis_pa.dot
+sourcefiles = version.ttl assembl_core.ttl catalyst_idea.ttl AIF-RDF.core.ttl pa_ibis.ttl sioc.ttl foaf.ttl catalyst_ibis.ttl catalyst_vote.ttl catalyst_core.ttl
 pdf_files  := $(subst .dot,.pdf,$(dotfiles))
 
 all: $(dotfiles) example.json
@@ -15,16 +15,26 @@ clean:
 
 
 ibis.dot: catalyst_ibis.ttl
-	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns ibis --files $(sourcefiles)
+	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl pa_ibis aif --desired_ns ibis --files $(sourcefiles)
+
+ibis_aif.dot: catalyst_ibis.ttl
+	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl pa_ibis --desired_ns ibis --files $(sourcefiles)
+
+ibis_pa.dot: catalyst_ibis.ttl
+	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl aif --desired_ns ibis --files $(sourcefiles)
 
 idea.dot: catalyst_idea.ttl
-	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns idea --files $(sourcefiles)
+	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl ibis --desired_ns idea --files $(sourcefiles)
 
 vote.dot: catalyst_vote.ttl
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns vote --files $(sourcefiles)
 
 assembl.dot: assembl_core.ttl
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns assembl --files $(sourcefiles)
+
+catalystcore.dot: catalyst_core.ttl
+	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns assembl --files $(sourcefiles)
+
 
 version.dot: version.ttl
 	python rdf2dot.py --output $@ --exclude_ns xsd rdfs owl --desired_ns version --files $(sourcefiles)

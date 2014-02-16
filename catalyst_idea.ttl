@@ -13,17 +13,20 @@
 idea:GenericIdea
     a owl:Class;
     owl:equivalentClass aif:Node .
-    # sioc:Post? Not convinced. no clear author etc.
+
+idea:GenericIdeaNode
+    a owl:Class;
+    rdfs:subClassOf idea:GenericIdea.
 
 idea:IdeaRelation
     a owl:Class;
-    rdfs:subClassOf aif:Statement .
-
+    rdfs:subClassOf idea:GenericIdea;
+    owl:equivalentClass [rdfs:subClassOf aif:Statement].
 
 idea:relates_idea
     a owl:ObjectProperty;
     rdfs:domain idea:IdeaRelation;
-    rdfs:range idea:GenericIdea.
+    rdfs:range idea:GenericIdeaNode.
 
 idea:DirectedIdeaRelation
     a owl:Class;
@@ -33,13 +36,13 @@ idea:source_idea
     a owl:ObjectProperty;
     rdfs:subPropertyOf idea:relates_idea;
     rdfs:domain idea:DirectedIdeaRelation;
-    rdfs:range idea:GenericIdea.
+    rdfs:range idea:GenericIdeaNode.
 
 idea:destination_idea
     a owl:ObjectProperty;
     rdfs:subPropertyOf idea:relates_idea;
     rdfs:domain idea:DirectedIdeaRelation;
-    rdfs:range idea:GenericIdea.
+    rdfs:range idea:GenericIdeaNode.
 
 idea:InclusionRelation
     a owl:Class;
@@ -70,9 +73,26 @@ idea:hasPart
 
 idea:partOf owl:inverseOf idea:hasPart .
 
+
+#map 
+
+idea:Map
+    a owl:Class;
+    rdfs:subClassOf idea:GenericIdea.
+    # Positional. We could just infer from in_map.
+
+idea:inMap
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:includes;
+    rdfs:range idea:Map.
+    # The map inclusion may not be referenced. Not clear that we need a reified relation here.
+
+
 # Those specialized statements would have more complex Statement_Descriptions, akin to schemes. (TBD)
 # But they cannot be S-Nodes, because they lack premise and conclusion; 
 # And they cannot be aif:Scheme_Application, because aif:Scheme_Application owl:disjoint aif:Statement.
+
+# all that follows is out-of-scope for Catalyst 1.
 
 # Relevance
 
@@ -103,6 +123,8 @@ idea:EquivalenceStatement
     a owl:Class;
     rdfs:subClassOf idea:ComparisonStatement.
 
+# Abstraction
+
 idea:AbstractionStatement
     a owl:Class;
     rdfs:subClassOf idea:ComparisonStatement, idea:DirectedIdeaRelation.
@@ -124,7 +146,7 @@ idea:specializes
 idea:is_abstraction_of owl:propertyChainAxiom (idea:is_abstracted idea:specializes).
 idea:is_abstraction_of owl:equivalentProperty pa_ibis:generalizes.
 
-# Causality: Use AIF.
+# Causality: Using AIF.
 
 idea:CausalStatement
     a owl:Class;
@@ -133,7 +155,6 @@ idea:CausalStatement
 idea:CausalInference
     a owl:Class;
     rdfs:subClassOf aif:CauseToEffect_Inference.
-
 
 # Questions.
 
@@ -145,7 +166,7 @@ idea:Question
 
 idea:ContextOfExpression
     a owl:Class;
-    owl:disjoint idea:GenericIdea. 
+    owl:disjoint idea:GenericIdeaNode. 
     # Not sure that contexts are not ideas.
     # This requires much future development.
     # will be used to express quotes, hypothetical statements and inference, etc.
