@@ -3,6 +3,11 @@
 # Raptor from http://librdf.org/
 # https://github.com/RDFLib/rdflib (pip install rdflib)
 # https://github.com/digitalbazaar/pyld (pip install pyld)
+#
+# Ubuntu:  
+# apt-get install python-pygraphviz raptor2-utils
+# sudo pip install rdflib>=4 pyld
+
 
 dotfiles = ibis.dot version.dot aif.dot vote.dot sioc.dot idea.dot assembl.dot ibis_idea.dot ibis_aif.dot ibis_pa.dot catalyst_core.dot
 sourcefiles = version.ttl assembl_core.ttl catalyst_idea.ttl AIF-RDF.core.ttl pa_ibis.ttl sioc.ttl foaf.ttl catalyst_ibis.ttl catalyst_vote.ttl catalyst_core.ttl
@@ -14,38 +19,38 @@ clean:
 	rm -f $(dotfiles) $(pdf_files) example.json
 
 
-ibis.dot: catalyst_ibis.ttl
+ibis.dot: catalyst_ibis.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl pa_ibis aif --desired_ns ibis --files $(sourcefiles)
 
-ibis_aif.dot: catalyst_ibis.ttl
+ibis_aif.dot: catalyst_ibis.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl pa_ibis --desired_ns ibis --files $(sourcefiles)
 
-ibis_pa.dot: catalyst_ibis.ttl
+ibis_pa.dot: catalyst_ibis.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl aif --desired_ns ibis --files $(sourcefiles)
 
-idea.dot: catalyst_idea.ttl
+idea.dot: catalyst_idea.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl ibis --desired_ns idea --files $(sourcefiles)
 
-vote.dot: catalyst_vote.ttl
+vote.dot: catalyst_vote.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns vote --files $(sourcefiles)
 
-assembl.dot: assembl_core.ttl
+assembl.dot: assembl_core.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns assembl --files $(sourcefiles)
 
-catalyst_core.dot: catalyst_core.ttl
+catalyst_core.dot: catalyst_core.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns catalyst --files $(sourcefiles)
 
 
-version.dot: version.ttl
+version.dot: version.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdfs owl --desired_ns version --files $(sourcefiles)
 
-aif.dot: AIF-RDF.core.ttl
+aif.dot: AIF-RDF.core.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns aif --files AIF-RDF.core.ttl
 
-sioc.dot: sioc.ttl
+sioc.dot: sioc.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns sioc --files $(sourcefiles)
 
-ibis_idea.dot: catalyst_idea.ttl
+ibis_idea.dot: catalyst_idea.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl vote assembl pa_ibis --desired_ns idea ibis --files $(sourcefiles)
 
 pdf: $(pdf_files)
