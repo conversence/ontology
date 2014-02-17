@@ -141,7 +141,7 @@ eg_site:annotation_1_target = {
 
 # A few ideas.
 
-eg_d1:idea_1 a ibis:Issue, idea:GenericIdeaNode;
+eg_d1:idea_1 a ibis:Issue;
     dcterms:title "Stop climate change"@eng;
     dcterms:description "A longer description "@eng;
     sioc:has_creator eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
@@ -149,14 +149,14 @@ eg_d1:idea_1 a ibis:Issue, idea:GenericIdeaNode;
     dcterms:modified "2014-01-02T11:32:17"^^xsd:dateTimeStamp;
     sioc:has_container eg_d1:ideas.
 
-eg_d1:idea_2 a ibis:Position, idea:GenericIdeaNode;
+eg_d1:idea_2 a ibis:Position;
     dcterms:title "We should telecommute"@eng.
 
 eg_d1:idealink_2_1 a ibis:PositionRespondsToIssue;
     ibis:response_position eg_d1:idea_2;
     ibis:response_issue eg_d1:idea_1.
 
-eg_d1:idea_3 a ibis:Argument, idea:GenericIdeaNode;
+eg_d1:idea_3 a ibis:Argument;
     dcterms:title """Personal transport is a big part 
         of fuel consumption."""@eng.
 

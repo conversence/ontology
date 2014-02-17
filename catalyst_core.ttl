@@ -79,7 +79,9 @@ catalyst:Idea
     rdfs:comment "An idea"@en ;
     rdfs:isDefinedBy <http://purl.org/catalyst/core#> ;
     rdfs:label "Idea"@en ;
-    owl:subClassOf sioc:Item, idea:GenericIdea. # , owl:Thing , dul:Entity, cohere:abstract_object, aif:Node, cohere:abstract_idea?, aif:I-node? skos:Concept??
+    owl:subClassOf sioc:Item, idea:GenericIdea. 
+    # To be considered: owl:Thing , dul:Entity, cohere:abstract_object,
+    # aif:Node, cohere:abstract_idea?, aif:I-node? skos:Concept??
 
 catalyst:ExcerptTarget a owl:Class;
     rdfs:comment "A fragment of an item or document."@en;

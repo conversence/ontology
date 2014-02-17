@@ -47,7 +47,8 @@ idea:destination_idea
 idea:InclusionRelation
     a owl:Class;
     rdfs:subClassOf idea:DirectedIdeaRelation;
-    rdfs:comment "This is a vague subordination property between ideas, as in mind maps and assembl containment."@eng.
+    rdfs:comment """This is a vague subordination property between ideas,
+        as in mind maps and assembl containment."""@eng.
 
 idea:includes
     a owl:AsymmetricProperty;
@@ -60,8 +61,9 @@ idea:includes
 idea:WholePartRelation
     a owl:Class;
     rdfs:subClassOf idea:InclusionRelation;
-    rdfs:comment """This is strict idea containment. Examples includes a proposal in many points, or identifying premises in an argument.
-    It may also be applied to Compendium-style maps (TBD.)"""@eng.
+    rdfs:comment """This is strict idea containment. Examples include
+        a proposal in many points, or identifying premises in an argument.
+        It may also be applied to Compendium-style maps (TBD.)"""@eng.
 
 idea:hasPart
     rdfs:subPropertyOf idea:includes, dcterms:hasPart;
@@ -85,12 +87,14 @@ idea:inMap
     a owl:ObjectProperty;
     rdfs:subPropertyOf idea:includes;
     rdfs:range idea:Map.
-    # The map inclusion may not be referenced. Not clear that we need a reified relation here.
+    # The map inclusion may not be referenced.
+    # Not clear that we need a reified relation here.
 
 
 # Those specialized statements would have more complex Statement_Descriptions, akin to schemes. (TBD)
 # But they cannot be S-Nodes, because they lack premise and conclusion; 
-# And they cannot be aif:Scheme_Application, because aif:Scheme_Application owl:disjoint aif:Statement.
+# And they cannot be aif:Scheme_Application, because 
+# aif:Scheme_Application owl:disjoint aif:Statement.
 
 # all that follows is out-of-scope for Catalyst 1.
 
