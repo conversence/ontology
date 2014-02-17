@@ -59,13 +59,13 @@ catalyst:ParticipantGroup
 catalyst:participants
     a owl:ObjectProperty;
     owl:subPropertyOf sioc:has_usergroup;
-    owl:domain catalyst:Discussion;
-    owl:range catalyst:ParticipantGroup.
+    rdfs:domain catalyst:Discussion;
+    rdfs:range catalyst:ParticipantGroup.
 
 catalyst:uses_source
     a owl:ObjectProperty;
-    owl:domain catalyst:Discussion;
-    owl:range sioc:Space.
+    rdfs:domain catalyst:Discussion;
+    rdfs:range sioc:Space.
 
 catalyst:Post 
     a owl:Class ;
@@ -105,18 +105,18 @@ catalyst:expressesIdea a owl:ObjectProperty ;
 
 catalyst:data_graph
     a owl:ObjectProperty;
-    owl:domain catalyst:Discussion;
-    owl:range trig:Graph.
+    rdfs:domain catalyst:Discussion;
+    rdfs:range trig:Graph.
 
 catalyst:user_graph
     a owl:ObjectProperty;
-    owl:domain catalyst:Site;
-    owl:range trig:Graph.
+    rdfs:domain catalyst:Site;
+    rdfs:range trig:Graph.
 
 catalyst:pseudonymization_graph
     a owl:ObjectProperty;
-    owl:domain catalyst:Discussion;
-    owl:range trig:Graph.
+    rdfs:domain catalyst:Discussion;
+    rdfs:range trig:Graph.
 
 
 catalyst:PseudonymAccount
