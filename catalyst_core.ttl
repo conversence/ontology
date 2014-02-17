@@ -72,14 +72,14 @@ catalyst:Post
     rdfs:comment "A post"@en ;
     rdfs:isDefinedBy <http://purl.org/catalyst/core#> ;
     rdfs:label "Post"@en ;
-    owl:subClassOf sioc:Post, sioc:Item .
+    owl:subClassOf sioc:Post, catalyst:Item .
 
 catalyst:Idea
     a owl:Class ;
     rdfs:comment "An idea"@en ;
     rdfs:isDefinedBy <http://purl.org/catalyst/core#> ;
     rdfs:label "Idea"@en ;
-    owl:subClassOf sioc:Item, idea:GenericIdea. 
+    owl:subClassOf catalyst:Item, idea:GenericIdea. 
     # To be considered: owl:Thing , dul:Entity, cohere:abstract_object,
     # aif:Node, cohere:abstract_idea?, aif:I-node? skos:Concept??
 
