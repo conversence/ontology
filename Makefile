@@ -16,7 +16,7 @@ pdf_files  := $(subst .dot,.pdf,$(dotfiles))
 all: $(dotfiles) example.json
 
 clean:
-	rm -f $(dotfiles) $(pdf_files) example.json
+	rm -f $(dotfiles) $(pdf_files) example.json foaf.ttl pa_ibis.ttl sioc.ttl sioc.rdf.xml foaf.ttl pa_ibis.ttl
 
 
 ibis.dot: catalyst_ibis.ttl $(sourcefiles)
