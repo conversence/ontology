@@ -68,7 +68,7 @@ sioc.rdf.xml:
 	curl -o $@ http://rdfs.org/sioc/ns
 
 foaf.rdf.xml:
-	curl -o $@ http://xmlns.com/foaf/0.1/
+	curl -H 'Accept: application/rdf+xml' -o $@ http://xmlns.com/foaf/0.1/
 
 %.ttl: %.rdf.xml
 	rapper -i rdfxml -o turtle $< > $@
