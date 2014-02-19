@@ -31,26 +31,15 @@ idea:CausalInference owl:subClassOf aif:CauseToEffect_Inference.
 
 idea:Question owl:subClassOf aif:DialogueScheme_Application.
 
-ibis:Position
-    a owl:Class;
-    owl:subClassOf idea:GenericIdeaNode, aif:Statement.
-    # Should we still call it Option?
+ibis:Position owl:subClassOf aif:Statement.
 
-ibis:Argument
-    a owl:Class;
-    owl:subClassOf idea:GenericIdeaNode, aif:Statement.
-    # it is part of Preference scheme, but a statement on its own.
+ibis:Argument owl:subClassOf aif:Statement.
+# it is part of Preference scheme, but a statement on its own.
 
+ibis:Reference owl:subClassOf aif:Statement.
 
-ibis:Reference
-    a owl:Class;
-    owl:subClassOf idea:GenericIdeaNode, aif:Statement.
-
-
-ibis:Decision
-    a owl:Class;
-    owl:subClassOf idea:GenericIdeaNode, aif:DialogueScheme_Application. # and Preference?
-    # Decision --relevant to-->Issue, Decision--hasConclusion-->Position
+ibis:Decision owl:subClassOf aif:DialogueScheme_Application. # and Preference?
+# Decision --relevant to-->Issue, Decision--hasConclusion-->Position
 
 ibis:Position owl:subClassOf aif:Statement.
 
