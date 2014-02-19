@@ -1,0 +1,29 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pa_ibis: <http://privatealpha.com/ontology/ibis/1#> .
+@prefix idea: <http://purl.org/catalyst/idea#> .
+@prefix ibis: <http://purl.org/catalyst/ibis#> .
+
+# Correspondance with pa_ibis
+
+idea:is_abstraction_of owl:equivalentProperty pa_ibis:generalizes.
+
+ibis:Issue owl:equivalentClass pa_ibis:Issue.
+
+ibis:Position owl:equivalentClass pa_ibis:Position.
+
+ibis:Argument owl:equivalentClass pa_ibis:Argument.
+
+pa_ibis:responds-to owl:equivalentProperty [owl:propertyChainAxiom (
+    [owl:inverseOf ibis:response_position] ibis:response_issue)].
+
+pa_ibis:supports owl:equivalentProperty [owl:propertyChainAxiom (
+    [owl:inverseOf ibis:argument_supporting] ibis:position_supported)].
+
+pa_ibis:opposes owl:equivalentProperty [owl:propertyChainAxiom (
+    [owl:inverseOf ibis:argument_opposing] ibis:position_opposed)].
+
+pa_ibis:questions owl:equivalentProperty [owl:propertyChainAxiom (
+    [owl:inverseOf ibis:issue_questioning] ibis:questioned_by_issue)].
+
+pa_ibis:suggests owl:equivalentProperty [owl:propertyChainAxiom (
+    [owl:inverseOf ibis:suggesting_issue] ibis:issue_suggested)].
