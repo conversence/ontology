@@ -19,7 +19,7 @@
 
 
 <http://purl.org/catalyst/core#>
-    dcterms:description """The basic components of a discussion."""@en ;
+    dcterms:description """The basic components of a conversation."""@en ;
     dcterms:title "Catalyst Core Ontology Namespace"@en ;
     a owl:Ontology, owl:Thing ;
     owl:versionInfo "Revision: 0.1" .
@@ -31,11 +31,11 @@ catalyst:Site
     a owl:Class;
     owl:subClassOf sioc:Site.
 
-catalyst:Discussion 
+catalyst:conversation 
     a owl:Class ;
-    rdfs:comment "A discussion"@en ;
+    rdfs:comment "A conversation"@en ;
     rdfs:isDefinedBy <http://purl.org/catalyst/core#> ;
-    rdfs:label "Discussion"@en ;
+    rdfs:label "conversation"@en ;
     owl:subClassOf sioc:Container, sioc:Space,
     [
         a owl:Restriction ;
@@ -59,12 +59,12 @@ catalyst:ParticipantGroup
 catalyst:participants
     a owl:ObjectProperty;
     owl:subPropertyOf sioc:has_usergroup;
-    rdfs:domain catalyst:Discussion;
+    rdfs:domain catalyst:conversation;
     rdfs:range catalyst:ParticipantGroup.
 
 catalyst:uses_source
     a owl:ObjectProperty;
-    rdfs:domain catalyst:Discussion;
+    rdfs:domain catalyst:conversation;
     rdfs:range sioc:Space.
 
 catalyst:Post 
@@ -93,8 +93,8 @@ catalyst:Excerpt a owl:Class;
 
 catalyst:relevantToDiscussion a owl:ObjectProperty ;
     rdfs:domain catalyst:Excerpt ;
-    rdfs:range catalyst:Discussion;
-    rdfs:label "relevant to discussion"@en;
+    rdfs:range catalyst:conversation;
+    rdfs:label "relevant to conversation"@en;
     rdfs:subPropertyOf pdoa:isRelatedTo .
 
 catalyst:expressesIdea a owl:ObjectProperty ;
@@ -105,7 +105,7 @@ catalyst:expressesIdea a owl:ObjectProperty ;
 
 catalyst:data_graph
     a owl:ObjectProperty;
-    rdfs:domain catalyst:Discussion;
+    rdfs:domain catalyst:conversation;
     rdfs:range trig:Graph.
 
 catalyst:user_graph
@@ -115,7 +115,7 @@ catalyst:user_graph
 
 catalyst:pseudonymization_graph
     a owl:ObjectProperty;
-    rdfs:domain catalyst:Discussion;
+    rdfs:domain catalyst:conversation;
     rdfs:range trig:Graph.
 
 
@@ -130,4 +130,4 @@ catalyst:PseudonymAgent
 catalyst:pseudonym_scope
     a owl:ObjectProperty;
     rdfs:domain [owl:unionOf (catalyst:PseudonymAgent catalyst:PseudonymAccount)];
-    rdfs:range catalyst:Discussion.
+    rdfs:range catalyst:conversation.
