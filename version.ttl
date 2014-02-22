@@ -6,7 +6,6 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix sioc: <http://rdfs.org/sioc/ns#> .
-@prefix assembl: <http://purl.org/assembl/core#> .
 @prefix catalyst: <http://purl.org/catalyst/core#> .
 @prefix version: <http://purl.org/catalyst/version#> .
 
@@ -17,7 +16,7 @@
 
 version:history_graph
     a owl:ObjectProperty;
-    rdfs:domain assembl:Discussion;
+    rdfs:domain catalyst:Conversation;
     rdfs:range trig:Graph.
 
 version:Operation

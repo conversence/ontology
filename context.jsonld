@@ -176,7 +176,7 @@
     "Post": "catalyst:Post",
     "Site": "catalyst:Site",
     "Item": "catalyst:Item",
-    "Discussion": "catalyst:Discussion",
+    "Conversation": "catalyst:Conversation",
     "ParticipantGroup": "catalyst:ParticipantGroup",
     "PseudonymAccount": "catalyst:PseudonymAccount",
     "PseudonymAgent": "catalyst:PseudonymAgent",

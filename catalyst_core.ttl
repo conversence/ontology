@@ -31,7 +31,7 @@ catalyst:Site
     a owl:Class;
     owl:subClassOf sioc:Site.
 
-catalyst:conversation 
+catalyst:Conversation 
     a owl:Class ;
     rdfs:comment "A conversation"@en ;
     rdfs:isDefinedBy <http://purl.org/catalyst/core#> ;
@@ -59,12 +59,12 @@ catalyst:ParticipantGroup
 catalyst:participants
     a owl:ObjectProperty;
     owl:subPropertyOf sioc:has_usergroup;
-    rdfs:domain catalyst:conversation;
+    rdfs:domain catalyst:Conversation;
     rdfs:range catalyst:ParticipantGroup.
 
 catalyst:uses_source
     a owl:ObjectProperty;
-    rdfs:domain catalyst:conversation;
+    rdfs:domain catalyst:Conversation;
     rdfs:range sioc:Space.
 
 catalyst:Post 
@@ -91,9 +91,9 @@ catalyst:Excerpt a owl:Class;
     rdfs:comment "A reference to a fragment of an item or document."@en;
     owl:subClassOf oa:Annotation.
 
-catalyst:relevantToDiscussion a owl:ObjectProperty ;
+catalyst:relevantToConversation a owl:ObjectProperty ;
     rdfs:domain catalyst:Excerpt ;
-    rdfs:range catalyst:conversation;
+    rdfs:range catalyst:Conversation;
     rdfs:label "relevant to conversation"@en;
     rdfs:subPropertyOf pdoa:isRelatedTo .
 
@@ -105,7 +105,7 @@ catalyst:expressesIdea a owl:ObjectProperty ;
 
 catalyst:data_graph
     a owl:ObjectProperty;
-    rdfs:domain catalyst:conversation;
+    rdfs:domain catalyst:Conversation;
     rdfs:range trig:Graph.
 
 catalyst:user_graph
@@ -115,7 +115,7 @@ catalyst:user_graph
 
 catalyst:pseudonymization_graph
     a owl:ObjectProperty;
-    rdfs:domain catalyst:conversation;
+    rdfs:domain catalyst:Conversation;
     rdfs:range trig:Graph.
 
 
@@ -130,4 +130,4 @@ catalyst:PseudonymAgent
 catalyst:pseudonym_scope
     a owl:ObjectProperty;
     rdfs:domain [owl:unionOf (catalyst:PseudonymAgent catalyst:PseudonymAccount)];
-    rdfs:range catalyst:conversation.
+    rdfs:range catalyst:Conversation.
