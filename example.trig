@@ -72,7 +72,7 @@ eg_site:user_benoitg a sioc:UserAccount;
     dcterms:hasPart eg_d1:forum, eg_d1:ideas;
     catalyst:participants eg_d1:d1_participants;
     catalyst:uses_source eg_d1:mailingList1;
-    version:history_graph <http://www.assembl.net/discussion/1/archive>.
+    catalyst:history_graph <http://www.assembl.net/discussion/1/archive>.
 
 eg_d1:forum a sioc:Forum ;
     dcterms:isPartOf <http://www.assembl.net/discussion/1/> .

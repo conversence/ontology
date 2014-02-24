@@ -12,7 +12,7 @@
 @prefix pdao: <http://purl.org/pundit/ont/oa#> .
 @prefix cohere: <http://cohere.open.ac.uk/ontology/cohere.owl#> .
 @prefix dul: <http://www.loa-cnr.it/ontologies/DUL.owl#> .
-@prefix aif: <http://www.arg.dundee.ac.uk/aif#> .
+@prefix sarest: <http://www.knoesis.org/research/srl/standards/sa-rest/#> .
 @prefix idea: <http://purl.org/catalyst/idea#> .
 @prefix catalyst: <http://purl.org/catalyst/core#> .
 @prefix ibis: <http://purl.org/catalyst/ibis#> .
@@ -27,9 +27,22 @@
 catalyst:Item a owl:Class;
     owl:subClassOf sioc:Item, oa:Target, foaf:Document.
 
+catalyst:Service a owl:Class;
+    owl:subClassOf sarest:Service.
+
 catalyst:Site
     a owl:Class;
     owl:subClassOf sioc:Site.
+
+catalyst:service_maps_container
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Service;
+    rdfs:range sioc:Container.
+
+catalyst:service_maps_graph
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Service;
+    rdfs:range trig:Graph.
 
 catalyst:Conversation 
     a owl:Class ;
@@ -50,6 +63,15 @@ catalyst:Ideas
         a owl:Restriction;
         owl:onProperty sioc:container_of ;
         owl:allValuesFrom catalyst:GenericIdea
+    ].
+
+catalyst:Messages
+    a owl:Class;
+    owl:subClassOf sioc:Forum,
+    [
+        a owl:Restriction;
+        owl:onProperty sioc:container_of ;
+        owl:allValuesFrom catalyst:Post
     ].
 
 catalyst:ParticipantGroup
@@ -118,6 +140,82 @@ catalyst:pseudonymization_graph
     rdfs:domain catalyst:Conversation;
     rdfs:range trig:Graph.
 
+catalyst:history_graph
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Conversation;
+    rdfs:range trig:Graph.
+
+catalyst:full_data_service
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Site;
+    rdfs:range catalyst:Service.
+
+catalyst:data_selection_service
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Site;
+    rdfs:range catalyst:Service.
+
+catalyst:sparql_service
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Site;
+    rdfs:range catalyst:Service.
+
+catalyst:ideas_service
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Conversation;
+    rdfs:range [ 
+        owl:subClassOf catalyst:Service, [
+            a owl:Restriction;
+            owl:onProperty catalyst:service_maps_container ;
+            owl:allValuesFrom catalyst:Ideas
+        ]
+    ].
+
+catalyst:users_service
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Site;
+    rdfs:range catalyst:Service.
+
+catalyst:service_maps_graph owl:propertyChainAxiom (
+    [owl:inverseOf catalyst:users_service] catalyst:user_graph).
+
+
+catalyst:messages_service
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Site;
+    rdfs:range [
+        owl:subClassOf catalyst:Service, [
+            a owl:Restriction;
+            owl:onProperty catalyst:service_maps_container ;
+            owl:allValuesFrom catalyst:user_graph
+        ]
+    ].
+
+catalyst:pseudonyms_service
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Conversation;
+    rdfs:range catalyst:Service.
+
+catalyst:service_maps_graph owl:propertyChainAxiom (
+    [owl:inverseOf catalyst:pseudonyms_service] catalyst:pseudonymization_graph).
+
+catalyst:message_sources_service
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Conversation;
+    rdfs:range catalyst:Service.
+
+catalyst:votes_service
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Conversation;
+    rdfs:range catalyst:Service.
+
+catalyst:history_service
+    a owl:ObjectProperty;
+    rdfs:domain catalyst:Conversation;
+    rdfs:range catalyst:Service.
+
+catalyst:service_maps_graph owl:propertyChainAxiom (
+    [owl:inverseOf catalyst:history_service] catalyst:history_graph).
 
 catalyst:PseudonymAccount
     a owl:Class;
