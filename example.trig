@@ -161,7 +161,7 @@ eg_d1:idea_3 a ibis:Argument;
 
 eg_d1:idealink_3_2 a ibis:ArgumentSupportsIdea;
     ibis:argument_supporting eg_d1:idea_3;
-    ibis:position_supported eg_d1:idea_2.
+    ibis:idea_argued eg_d1:idea_2.
 
 # Vote
 

@@ -17,10 +17,10 @@ pa_ibis:responds-to owl:equivalentProperty [owl:propertyChainAxiom (
     [owl:inverseOf ibis:response_position] ibis:response_issue)].
 
 pa_ibis:supports owl:equivalentProperty [owl:propertyChainAxiom (
-    [owl:inverseOf ibis:argument_supporting] ibis:position_supported)].
+    [owl:inverseOf ibis:argument_supporting] ibis:idea_argued)].
 
 pa_ibis:opposes owl:equivalentProperty [owl:propertyChainAxiom (
-    [owl:inverseOf ibis:argument_opposing] ibis:position_opposed)].
+    [owl:inverseOf ibis:argument_opposing] ibis:idea_argued)].
 
 pa_ibis:questions owl:equivalentProperty [owl:propertyChainAxiom (
     [owl:inverseOf ibis:issue_questioning] ibis:questioned_by_issue)].

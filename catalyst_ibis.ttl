@@ -72,20 +72,9 @@ ibis:argument_supporting
     rdfs:subPropertyOf ibis:argument_arguing;
     rdfs:domain ibis:ArgumentSupportsIdea.
 
-ibis:idea_supported
-    a owl:ObjectProperty;
-    rdfs:subPropertyOf ibis:idea_argued;
-    rdfs:domain ibis:ArgumentSupportsIdea.
-
-
 ibis:ArgumentOpposesIdea
     a owl:Class;
     owl:subClassOf ibis:ArgumentApplication.
-
-ibis:position_opposed
-    a owl:ObjectProperty;
-    rdfs:subPropertyOf ibis:idea_argued;
-    rdfs:domain ibis:ArgumentOpposesIdea.
 
 ibis:argument_opposing
     a owl:ObjectProperty;

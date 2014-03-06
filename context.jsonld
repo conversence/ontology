@@ -80,8 +80,6 @@
     "issue_questioning": {"@id": "ibis:issue_questioning", "@type": "@id"},
     "issue_suggested": {"@id": "ibis:issue_suggested", "@type": "@id"},
     "idea_argued": {"@id": "ibis:idea_argued", "@type": "@id"},
-    "idea_opposed": {"@id": "ibis:idea_opposed", "@type": "@id"},
-    "idea_supported": {"@id": "ibis:idea_supported", "@type": "@id"},
     "questioned_by_issue": {"@id": "ibis:questioned_by_issue", "@type": "@id"},
     "response_issue": {"@id": "ibis:response_issue", "@type": "@id"},
     "response_position": {"@id": "ibis:response_position", "@type": "@id"},
