@@ -159,7 +159,7 @@ eg_d1:idea_3 a ibis:Argument;
     dcterms:title """Personal transport is a big part 
         of fuel consumption."""@eng.
 
-eg_d1:idealink_3_2 a ibis:ArgumentSupportsPosition;
+eg_d1:idealink_3_2 a ibis:ArgumentSupportsIdea;
     ibis:argument_supporting eg_d1:idea_3;
     ibis:position_supported eg_d1:idea_2.
 

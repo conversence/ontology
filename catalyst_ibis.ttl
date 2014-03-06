@@ -58,40 +58,39 @@ ibis:argument_arguing
     rdfs:domain ibis:ArgumentApplication;
     rdfs:range ibis:Argument.
 
-ibis:position_argued
+ibis:idea_argued
     a owl:ObjectProperty;
     rdfs:domain ibis:ArgumentApplication;
-    rdfs:range ibis:Position.
+    rdfs:range idea:GenericIdeaNode.
 
-
-ibis:ArgumentSupportsPosition
+ibis:ArgumentSupportsIdea
     a owl:Class;
     owl:subClassOf ibis:ArgumentApplication.
 
 ibis:argument_supporting
     a owl:ObjectProperty;
     rdfs:subPropertyOf ibis:argument_arguing;
-    rdfs:domain ibis:ArgumentSupportsPosition.
+    rdfs:domain ibis:ArgumentSupportsIdea.
 
-ibis:position_supported
+ibis:idea_supported
     a owl:ObjectProperty;
-    rdfs:subPropertyOf ibis:position_argued;
-    rdfs:domain ibis:ArgumentSupportsPosition.
+    rdfs:subPropertyOf ibis:idea_argued;
+    rdfs:domain ibis:ArgumentSupportsIdea.
 
 
-ibis:ArgumentOpposesPosition
+ibis:ArgumentOpposesIdea
     a owl:Class;
     owl:subClassOf ibis:ArgumentApplication.
 
 ibis:position_opposed
     a owl:ObjectProperty;
-    rdfs:subPropertyOf ibis:position_argued;
-    rdfs:domain ibis:ArgumentOpposesPosition.
+    rdfs:subPropertyOf ibis:idea_argued;
+    rdfs:domain ibis:ArgumentOpposesIdea.
 
 ibis:argument_opposing
     a owl:ObjectProperty;
     rdfs:subPropertyOf ibis:argument_arguing;
-    rdfs:domain ibis:ArgumentOpposesPosition.
+    rdfs:domain ibis:ArgumentOpposesIdea.
 
 
 # Questions
