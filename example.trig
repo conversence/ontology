@@ -19,7 +19,7 @@
 
 # A site, with a forum and a user.
 
-<http://www.assembl.net> a catalyst:Site ;
+<http://www.assembl.net/> a catalyst:Site ;
     sioc:space_of <http://www.assembl.net/discussion/1/>;
     sioc:host_of eg_d1:forum.
 
