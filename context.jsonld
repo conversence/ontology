@@ -182,6 +182,7 @@
     "PseudonymAgent": "catalyst:PseudonymAgent",
     "Excerpt": "catalyst:Excerpt",
     "ExcerptTarget": "catalyst:ExcerptTarget",
+    "extractRelevantToIdea": {"@id": "catalyst:extractRelevantToIdea", "@type": "@id"},
     "expressesIdea": {"@id": "catalyst:expressesIdea", "@type": "@id"},
     "Ideas": "catalyst:Ideas",
     "relevantToDiscussion": {"@id": "catalyst:relevantToDiscussion", "@type": "@id"},

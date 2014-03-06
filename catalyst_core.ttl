@@ -119,11 +119,15 @@ catalyst:relevantToConversation a owl:ObjectProperty ;
     rdfs:label "relevant to conversation"@en;
     rdfs:subPropertyOf pdoa:isRelatedTo .
 
-catalyst:expressesIdea a owl:ObjectProperty ;
+catalyst:extractRelevantToIdea a owl:ObjectProperty ;
     rdfs:domain catalyst:Excerpt ;
     rdfs:range catalyst:Idea;
-    rdfs:label "expresses the idea"@en;
+    rdfs:label "relevant to the idea"@en;
     rdfs:subPropertyOf pdoa:isRelatedTo .
+
+catalyst:expressesIdea a owl:ObjectProperty ;
+    rdfs:subPropertyOf catalyst:extractRelevantToIdea;
+    rdfs:label "expresses the idea"@en.
 
 catalyst:data_graph
     a owl:ObjectProperty;
