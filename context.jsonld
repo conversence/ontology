@@ -220,6 +220,8 @@
     "hasSelector": {"@id": "oa:hasSelector", "@type": "@id"},
     "hasSource": {"@id": "oa:hasSource", "@type": "@id"},
     "hasTarget": {"@id": "oa:hasTarget", "@type": "@id"},
+    "annotatedAt": {"@id": "oa:annotatedAt", "@type":"xsd:dateTimeStamp"},
+    "serializedBy": {"@id": "oa:serializedBy", "@type":"@id"},
 
     "BinaryVote": "vote:BinaryVote",
     "LickertRange": "vote:LickertRange",
