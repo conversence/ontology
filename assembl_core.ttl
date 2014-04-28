@@ -42,3 +42,21 @@ assembl:has_origin a owl:ObjectProperty;
     rdfs:domain catalyst:Post;
     rdfs:range assembl:PostSource.
 
+assembl:relatedToIdea a owl:ObjectProperty;
+    rdfs:range idea:GenericIdea.
+
+assembl:postLinkedToIdea a owl:ObjectProperty;
+    owl:subPropertyOf assembl:relatedToIdea;
+    rdfs:domain catalyst:Post.
+
+assembl:postDelinkedToIdea a owl:ObjectProperty;
+    owl:subPropertyOf assembl:relatedToIdea;
+    rdfs:domain catalyst:Post.
+
+assembl:postRelatedToIdea a owl:ObjectProperty;
+    owl:subPropertyOf assembl:postLinkedToIdea.
+
+assembl:postExtractRelatedToIdea a owl:ObjectProperty;
+    owl:subPropertyOf assembl:postRelatedToIdea;
+    owl:propertyChainAxiom (
+        [owl:inverseOf catalyst:ExcerptTarget] catalyst:extractRelevantToIdea).
