@@ -91,6 +91,7 @@
     "Organization": "foaf:Organization",
     "familyName": "foaf:familyName",
     "firstName": "foaf:firstName",
+    "fname": "foaf:name",
     "mbox": "foaf:mbox",
 
     "Community": "sioc:Community",
