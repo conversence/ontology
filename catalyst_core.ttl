@@ -105,22 +105,17 @@ catalyst:Idea
     # To be considered: owl:Thing , dul:Entity, cohere:abstract_object,
     # aif:Node, cohere:abstract_idea?, aif:I-node? skos:Concept??
 
-catalyst:ExcerptTarget a owl:Class;
-    rdfs:comment "A fragment of an item or document."@en;
-    owl:subClassOf oa:SpecificResource.
-
 catalyst:Excerpt a owl:Class;
     rdfs:comment "A reference to a fragment of an item or document."@en;
     owl:subClassOf oa:Annotation.
 
 catalyst:relevantToConversation a owl:ObjectProperty ;
-    rdfs:domain catalyst:Excerpt ;
+    # Domain: Web page or oa:SpecificResource
     rdfs:range catalyst:Conversation;
     rdfs:label "relevant to conversation"@en;
     rdfs:subPropertyOf pdoa:isRelatedTo .
 
 catalyst:extractRelevantToIdea a owl:ObjectProperty ;
-    rdfs:domain catalyst:Excerpt ;
     rdfs:range catalyst:Idea;
     rdfs:label "relevant to the idea"@en;
     rdfs:subPropertyOf pdoa:isRelatedTo .
