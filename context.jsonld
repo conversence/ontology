@@ -110,6 +110,7 @@
     "content": "sioc:content",
     "email": "sioc:email",
     "email_sha1": "sioc:email_sha1",
+    "hasFunction": "sioc:hasFunction",
     "id": "sioc:id",
     "ip_address": "sioc:ip_address",
     "last_activity_date": "sioc:last_activity_date",
