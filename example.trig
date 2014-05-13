@@ -45,25 +45,8 @@ eg_site:user_benoitg a sioc:UserAccount;
 
 }
 
-<http://www.assembl.net/discussion/1/> a catalyst:Conversation;
+<http://www.assembl.net/discussion/1/> a catalyst:Conversation, trig:Graph.
     # To a non-catalyst-aware tool, this is a sioc:Container and sioc:Space.
-    catalyst:pseudonymization_graph <http://www.assembl.net/discussion/1/pseudonyms>;
-    catalyst:data_graph <http://www.assembl.net/discussion/1/data>.
-
-# This graph would not be public
-
-<http://www.assembl.net/discussion/1/pseudonyms> = {
-    eg_d1:pseudo_c371ca84d91eb13f3ea610855d417db0a13dd082 a foaf:Person;
-        owl:sameAs eg_site:agent_benoitg.
-    eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36 a sioc:UserAccount;
-        sioc:account_of eg_d1:pseudo_c371ca84d91eb13f3ea610855d417db0a13dd082;
-        owl:sameAs eg_site:user_benoitg.
-    eg_d1:pseudo_21ddd0f62e22ddab75c6e9fa92fda056e65dc0ac a foaf:Person;
-        owl:sameAs eg_site:agent_maparent.
-    eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2 a sioc:UserAccount;
-        sioc:account_of eg_d1:pseudo_21ddd0f62e22ddab75c6e9fa92fda056e65dc0ac;
-        owl:sameAs eg_site:user_maparent.
-}
 
 # The history graph
 
@@ -74,7 +57,7 @@ eg_site:user_benoitg a sioc:UserAccount;
     eg_d1:event1
         a version:Create;
         version:what eg_d1:message_1;
-        version:who eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
+        version:who eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
         version:revision "0"^^xsd:integer;
         version:when "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
         version:snapshot [
@@ -82,14 +65,14 @@ eg_site:user_benoitg a sioc:UserAccount;
             dcterms:created "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
             dcterms:title "Climate change is a problem"@eng;
             sioc:content """Let's do something draft placeholder"""@eng;
-            sioc:has_creator eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
+            sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
             sioc:has_container eg_d1:forum;
             version:snapshot_of eg_d1:message_1
         ].
     eg_d1:event2
         a version:Update;
         version:what eg_d1:message_1;
-        version:who eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
+        version:who eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
         version:revision "1"^^xsd:integer;
         version:when "2013-11-01T09:12:15"^^xsd:dateTimeStamp;
         version:updated_value [
@@ -106,13 +89,13 @@ eg_site:user_benoitg a sioc:UserAccount;
         ].
     eg_d1:event3
         a version:ReadStatusChange;
-        version:who eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36;
+        version:who eg_d1:account_6e5902d716fa578590a0b987c6e82a0249688e36;
         version:what eg_d1:message_1;
         version:revision "2"^^xsd:integer;
         version:when "2013-11-02T11:00:01"^^xsd:dateTimeStamp.
     eg_d1:event4
         a version:Delete;
-        version:who eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
+        version:who eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
         version:what eg_d1:message_1;
         version:revision "3"^^xsd:integer;
         version:when "2013-11-03T11:00:01"^^xsd:dateTimeStamp;
@@ -121,7 +104,7 @@ eg_site:user_benoitg a sioc:UserAccount;
             dcterms:created "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
             dcterms:title "Climate change is a real problem"@eng;
             sioc:content """We need to reduce CO2 levels."""@eng;
-            sioc:has_creator eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
+            sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
             sioc:has_container eg_d1:forum;
             version:snapshot_of eg_d1:message_1
         ].
@@ -132,7 +115,7 @@ eg_site:user_benoitg a sioc:UserAccount;
 
 # This is the main graph
 
-<http://www.assembl.net/discussion/1/data> = {
+<http://www.assembl.net/discussion/1/> = {
 
 <http://www.assembl.net/discussion/1/> 
     dcterms:hasPart eg_d1:forum, eg_d1:ideas;
@@ -148,8 +131,19 @@ eg_d1:ideas a catalyst:Ideas ;
     # To a non-assembl-aware tool, this is just another sioc:Container.
 
 eg_d1:d1_participants a catalyst:Participants;
-    sioc:has_member eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36,
-        eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2.
+    sioc:has_member eg_d1:account_6e5902d716fa578590a0b987c6e82a0249688e36,
+        eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2.
+
+eg_d1:person_c371ca84d91eb13f3ea610855d417db0a13dd082 a foaf:Person.
+
+eg_d1:account_6e5902d716fa578590a0b987c6e82a0249688e36 a sioc:UserAccount;
+    sioc:account_of eg_d1:person_c371ca84d91eb13f3ea610855d417db0a13dd082.
+
+eg_d1:person_c371ca84d91eb13f3ea610855d417db0a13dd082 a foaf:Person.
+
+eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2 a sioc:UserAccount;
+    sioc:account_of eg_d1:person_c371ca84d91eb13f3ea610855d417db0a13dd082.
+
 
 eg_d1:d1_member a sioc:Role;
     sioc:has_scope <http://www.assembl.net/discussion/1/> .
@@ -162,15 +156,15 @@ eg_d1:message_1 a sioc:Post ;
     dcterms:created "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
     dcterms:title "Climate change is a real problem"@eng;
     sioc:content """We need to reduce CO2 levels."""@eng;
-    sioc:has_creator eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
+    sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
     sioc:addressed_to "discussion1@assembl.net";
     sioc:has_container eg_d1:forum;
     assembl:has_origin eg_d1:d1_mailingList1.
 
 eg_d1:message_2 a sioc:Post ;
     dcterms:title "Telecommuting might help"@eng;
-    sioc:has_creator eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36;
-    sioc:addressed_to eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
+    sioc:has_creator eg_d1:account_6e5902d716fa578590a0b987c6e82a0249688e36;
+    sioc:addressed_to eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
     sioc:has_container eg_d1:forum;
     assembl:has_origin eg_d1:d1_mailingList1;
     sioc:reply_of eg_d1:message_1.
@@ -254,7 +248,7 @@ eg_site:annotation_4_target a trig:Graph.
 eg_d1:idea_1 a ibis:Issue;
     dcterms:title "Stop climate change"@eng;
     dcterms:description "A longer description "@eng;
-    sioc:has_creator eg_d1:pseudo_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
+    sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
     dcterms:created "2013-11-02T14:20:04"^^xsd:dateTimeStamp;
     dcterms:modified "2014-01-02T11:32:17"^^xsd:dateTimeStamp;
     sioc:has_container eg_d1:ideas.
@@ -277,7 +271,7 @@ eg_d1:idealink_3_2 a ibis:ArgumentSupportsIdea;
 # Vote
 
 eg_d1:vote1 a vote:BinaryVote;
-    vote:voter eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36;
+    vote:voter eg_d1:account_6e5902d716fa578590a0b987c6e82a0249688e36;
     dcterms:created "2013-11-02T14:20:04"^^xsd:dateTimeStamp;
     vote:subject eg_d1:idea_3;
     vote:positive "true"^^xsd:boolean.
@@ -287,13 +281,13 @@ eg_d1:vote_range a vote:LickertRange;
     vote:max "10"^^xsd:integer.
 
 eg_d1:vote2 a vote:LickertVote;
-    vote:voter eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36;
+    vote:voter eg_d1:account_6e5902d716fa578590a0b987c6e82a0249688e36;
     vote:subject eg_d1:idea_3;
     vote:lickert_in_range eg_d1:vote_range;
     vote:lickert_value "8"^^xsd:integer.
 
 eg_d1:vote3 a vote:OrderingVote;
-    vote:voter eg_d1:pseudo_6e5902d716fa578590a0b987c6e82a0249688e36;
+    vote:voter eg_d1:account_6e5902d716fa578590a0b987c6e82a0249688e36;
     vote:ordered_ideas [ a rdf:Seq;
         rdf:_1 eg_d1:idea3;
         rdf:_2 eg_d1:idea5;
