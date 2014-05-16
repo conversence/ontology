@@ -245,6 +245,8 @@
     "ordered_ideas": {"@id": "vote:ordered_ideas", "@type": "@id"},
     "positive": {"@id": "vote:positive", "@type": "xsd:boolean"},
     "vote_subject": {"@id": "vote:subject", "@type": "@id"},
+    "vote_subject_node": {"@id": "vote:subject_node", "@type": "@id"},
+    "vote_subject_link": {"@id": "vote:subject_link", "@type": "@id"},
     "voter": {"@id": "vote:voter", "@type": "@id"},
 
     "Annotate": "version:Annotate",
