@@ -24,10 +24,10 @@
     "dclanguage": "dcterms:language",
     "format": "dcterms:format",
     "conformsTo": "dcterms:conformsTo",
-    "created": {"@id": "dcterms:created", "@type": "xsd:dateTimeStamp"},
+    "created": {"@id": "dcterms:created", "@type": "xsd:dateTime"},
     "date": {"@id": "dcterms:date", "@type": "xsd:date"},
     "description": "dcterms:description",
-    "modified": {"@id": "dcterms:modified", "@type": "xsd:dateTimeStamp"},
+    "modified": {"@id": "dcterms:modified", "@type": "xsd:dateTime"},
     "hasPart": {"@id": "dcterms:hasPart", "@type": "@id"},
     "isPartOf": {"@id": "dcterms:isPartOf", "@type": "@id"},
 
@@ -212,9 +212,11 @@
 
 
     "MailingList": "assembl:MailingList",
-    "link_order": {"@id": "assembl:link_order", "@type": "xsd:float"},
+    "link_order": {"@id": "assembl:link_order", "@type": "xsd:double"},
     "db_id": {"@id": "assembl:db_id", "@type": "xsd:integer"},
     "has_origin": {"@id": "assembl:has_origin", "@type": "@id"},
+    "postExtractRelatedToIdea": {"@id": "assembl:postExtractRelatedToIdea", "@type": "@id"},
+    "postLinkedToIdea": {"@id": "assembl:postLinkedToIdea", "@type": "@id"},
 
     "Annotation": "oa:Annotation",
     "SpecificResource": "oa:SpecificResource",
@@ -230,7 +232,7 @@
     "hasSelector": {"@id": "oa:hasSelector", "@type": "@id"},
     "hasSource": {"@id": "oa:hasSource", "@type": "@id"},
     "hasTarget": {"@id": "oa:hasTarget", "@type": "@id"},
-    "annotatedAt": {"@id": "oa:annotatedAt", "@type":"xsd:dateTimeStamp"},
+    "annotatedAt": {"@id": "oa:annotatedAt", "@type":"xsd:dateTime"},
     "serializedBy": {"@id": "oa:serializedBy", "@type":"@id"},
 
     "BinaryVote": "vote:BinaryVote",
@@ -278,7 +280,7 @@
     "tombstone": {"@id": "version:tombstone", "@type": "@id"},
     "updated_value": {"@id": "version:updated_value", "@type": "@id"},
     "what": {"@id": "version:what", "@type": "@id"},
-    "when": {"@id": "version:when", "@type": "xsd:dateTimeStamp"},
+    "when": {"@id": "version:when", "@type": "xsd:dateTime"},
     "who": {"@id": "version:who", "@type": "@id"},
 
     "sameAs": {"@id": "owl:sameAs", "@type": "@id"},
