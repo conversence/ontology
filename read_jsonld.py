@@ -25,18 +25,22 @@ npm.bind("version", "http://purl.org/catalyst/version#")
 npm.bind("vote", "http://purl.org/catalyst/vote#")
 npm.bind("eg_site", "http://www.assembl.net/")
 npm.bind("eg_d1", "http://www.assembl.net/discussion/1/")
-npm.bind("kmi_eg", "http://maptesting.kmi.open.ac.uk/api/")
-npm.bind("kmi_eg_nodes", "http://maptesting.kmi.open.ac.uk/api/nodes/")
+npm.bind("kmieg", "http://maptesting.kmi.open.ac.uk/api/")
+npm.bind("kmiegnodes", "http://maptesting.kmi.open.ac.uk/api/nodes/")
 
 def convert(src, dest, format='trig'):
     quads = jsonld.to_rdf('file:'+src, {'format': 'application/nquads'})
-    g = ConjunctiveGraph()
-    g.namespace_manager=npm
-    g.parse(data=quads, format='nquads')
-    for c in g.contexts():
-        c.namespace_manager=npm
-    with open(dest, 'w') as f:
-        f.write(g.serialize(format=format, namespace=npm))
+    if format == 'nquads':
+        with open(dest, 'w') as f:
+            f.write(quads.encode('utf-8'))
+    else:
+        g = ConjunctiveGraph()
+        g.namespace_manager=npm
+        g.parse(data=quads, format='nquads')
+        for c in g.contexts():
+            c.namespace_manager=npm
+        with open(dest, 'w') as f:
+            f.write(g.serialize(format=format))
 
 if __name__ == '__main__':
     convert(*argv[1:])
