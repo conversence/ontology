@@ -265,8 +265,8 @@ eg_d1:idea_3 a ibis:Argument;
         of fuel consumption."""@eng.
 
 eg_d1:idealink_3_2 a ibis:ArgumentSupportsIdea;
-    ibis:argument_supporting eg_d1:idea_3;
-    ibis:idea_argued eg_d1:idea_2.
+    ibis:argument_arguing eg_d1:idea_3;
+    ibis:target_idea eg_d1:idea_2.
 
 # Vote
 
