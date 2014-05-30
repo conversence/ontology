@@ -35,14 +35,14 @@ ibis:argumentAdressesCriterion
 
 ibis:criterionSupports
     a owl:ObjectProperty;
-    rdfs:subPropertyOf aif:hasPreferredElement;
+    rdfs:subPropertyOf aif:hasPreferredElement, ibis:source_idea;
     rdfs:domain ibis:CriterionApplication;
     rdfs:range ibis:Position;
     owl:propertyChainAxiom (idea:hasPart ibis:position_supported).
 
 ibis:criterionOpposes
     a owl:ObjectProperty;
-    rdfs:subPropertyOf aif:hasDispreferredElement;
+    rdfs:subPropertyOf aif:hasDispreferredElement, ibis:target_idea;
     rdfs:domain ibis:CriterionApplication;
     rdfs:range ibis:Position;
     owl:propertyChainAxiom (idea:hasPart ibis:position_opposed).

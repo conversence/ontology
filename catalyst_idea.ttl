@@ -39,7 +39,8 @@ idea:destination_idea
     a owl:ObjectProperty;
     owl:subPropertyOf idea:relates_idea;
     rdfs:domain idea:DirectedIdeaRelation;
-    rdfs:range idea:GenericIdeaNode.
+    rdfs:range idea:GenericIdeaNode;
+    rdfs:comment "The destination is the parent"@eng.
 
 idea:InclusionRelation
     a owl:Class;
@@ -49,6 +50,16 @@ idea:InclusionRelation
 
 idea:includes
     a owl:AsymmetricProperty;
+    owl:propertyChainAxiom (
+        [owl:inverseOf idea:destination_idea;
+        rdfs:range idea:InclusionRelation]
+        idea:source_idea
+        ).
+
+
+idea:includedIn
+    a owl:AsymmetricProperty;
+    owl:inverseOf idea:includes;
     owl:propertyChainAxiom (
         [owl:inverseOf idea:source_idea;
         rdfs:range idea:InclusionRelation]
@@ -64,6 +75,15 @@ idea:WholePartRelation
 
 idea:hasPart
     owl:subPropertyOf idea:includes, dcterms:hasPart;
+    owl:propertyChainAxiom (
+        [owl:inverseOf idea:destination_idea;
+        rdfs:range idea:WholePartRelation]
+        idea:source_idea
+        ).
+
+idea:isPartOf
+    owl:subPropertyOf idea:included_in, dcterms:isPartOf;
+    owl:inverseOf idea:hasPart;
     owl:propertyChainAxiom (
         [owl:inverseOf idea:source_idea;
         rdfs:range idea:WholePartRelation]

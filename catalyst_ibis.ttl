@@ -55,68 +55,32 @@ ibis:ArgumentApplication
 
 ibis:argument_arguing
     a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:source_idea;
     rdfs:domain ibis:ArgumentApplication;
     rdfs:range ibis:Argument.
-
-ibis:idea_argued
-    a owl:ObjectProperty;
-    rdfs:domain ibis:ArgumentApplication;
-    rdfs:range idea:GenericIdeaNode.
 
 ibis:ArgumentSupportsIdea
     a owl:Class;
     owl:subClassOf ibis:ArgumentApplication.
 
-ibis:argument_supporting
-    a owl:ObjectProperty;
-    rdfs:subPropertyOf ibis:argument_arguing;
-    rdfs:domain ibis:ArgumentSupportsIdea.
-
 ibis:ArgumentOpposesIdea
     a owl:Class;
     owl:subClassOf ibis:ArgumentApplication.
 
-ibis:argument_opposing
-    a owl:ObjectProperty;
-    rdfs:subPropertyOf ibis:argument_arguing;
-    rdfs:domain ibis:ArgumentOpposesIdea.
+#suggests
 
+ibis:IssueAppliesTo
+    a owl:Class;
+    owl:subClassOf idea:DirectedIdeaRelation, idea:MutualRelevanceStatement.
+
+ibis:applicable_issue
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:source_idea;
+    rdfs:domain ibis:IssueAppliesTo;
+    rdfs:range ibis:Issue.
 
 # Questions
 
 ibis:IssueQuestions
     a owl:Class;
-    owl:subClassOf idea:DirectedIdeaRelation, idea:MutualRelevanceStatement.
-
-ibis:issue_questioning
-    a owl:ObjectProperty;
-    rdfs:subPropertyOf idea:source_idea;
-    rdfs:domain ibis:IssueQuestions;
-    rdfs:range ibis:Issue.
-
-ibis:questioned_by_issue
-    a owl:ObjectProperty;
-    rdfs:subPropertyOf idea:target_idea;
-    rdfs:domain ibis:IssueQuestions;
-    rdfs:range idea:GenericIdeaNode. 
-    #[owl:unionOf (ibis:Position ibis:Argument ibis:Issue)].
-
-
-#suggests
-
-ibis:SuggestsIssue
-    a owl:Class;
-    owl:subClassOf idea:DirectedIdeaRelation, idea:MutualRelevanceStatement.
-
-ibis:suggesting_issue
-    a owl:ObjectProperty;
-    rdfs:subPropertyOf idea:source_idea;
-    rdfs:domain ibis:SuggestsIssue;
-    rdfs:range idea:GenericIdeaNode.
-    #[owl:unionOf (ibis:Position ibis:Argument ibis:Issue)].
-
-ibis:issue_suggested
-    a owl:ObjectProperty;
-    rdfs:subPropertyOf idea:target_idea;
-    rdfs:domain ibis:SuggestsIssue;
-    rdfs:range ibis:Issue.
+    owl:subClassOf idea:IssueAppliesTo.
