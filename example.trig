@@ -59,10 +59,10 @@ eg_site:user_benoitg a sioc:UserAccount;
         version:what eg_d1:message_1;
         version:who eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
         version:revision "0"^^xsd:integer;
-        version:when "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
+        version:when "2013-11-01T09:00:04"^^xsd:dateTime;
         version:snapshot [
             a sioc:Post, version:ObjectSnapshot ;
-            dcterms:created "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
+            dcterms:created "2013-11-01T09:00:04"^^xsd:dateTime;
             dcterms:title "Climate change is a problem"@eng;
             sioc:content """Let's do something draft placeholder"""@eng;
             sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
@@ -74,7 +74,7 @@ eg_site:user_benoitg a sioc:UserAccount;
         version:what eg_d1:message_1;
         version:who eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
         version:revision "1"^^xsd:integer;
-        version:when "2013-11-01T09:12:15"^^xsd:dateTimeStamp;
+        version:when "2013-11-01T09:12:15"^^xsd:dateTime;
         version:updated_value [
             a rdf:Statement;
             rdf:subject eg_d1:message_1;
@@ -92,16 +92,16 @@ eg_site:user_benoitg a sioc:UserAccount;
         version:who eg_d1:account_6e5902d716fa578590a0b987c6e82a0249688e36;
         version:what eg_d1:message_1;
         version:revision "2"^^xsd:integer;
-        version:when "2013-11-02T11:00:01"^^xsd:dateTimeStamp.
+        version:when "2013-11-02T11:00:01"^^xsd:dateTime.
     eg_d1:event4
         a version:Delete;
         version:who eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
         version:what eg_d1:message_1;
         version:revision "3"^^xsd:integer;
-        version:when "2013-11-03T11:00:01"^^xsd:dateTimeStamp;
+        version:when "2013-11-03T11:00:01"^^xsd:dateTime;
         version:tombstone [
             a sioc:Post, version:Tombstone ;
-            dcterms:created "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
+            dcterms:created "2013-11-01T09:00:04"^^xsd:dateTime;
             dcterms:title "Climate change is a real problem"@eng;
             sioc:content """We need to reduce CO2 levels."""@eng;
             sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
@@ -118,17 +118,14 @@ eg_site:user_benoitg a sioc:UserAccount;
 <http://www.assembl.net/discussion/1/> = {
 
 <http://www.assembl.net/discussion/1/> 
-    dcterms:hasPart eg_d1:forum, eg_d1:ideas;
+    dcterms:hasPart eg_d1:forum;
     catalyst:participants eg_d1:d1_participants;
     catalyst:uses_source eg_d1:mailingList1;
-    catalyst:history_graph <http://www.assembl.net/discussion/1/archive>.
+    catalyst:history_graph <http://www.assembl.net/discussion/1/archive>;
+    catalyst:primaryMap <http://www.assembl.net/discussion/1/>.
 
 eg_d1:forum a sioc:Forum ;
     dcterms:isPartOf <http://www.assembl.net/discussion/1/> .
-
-eg_d1:ideas a catalyst:Ideas ;
-    dcterms:isPartOf <http://www.assembl.net/discussion/1/> .
-    # To a non-assembl-aware tool, this is just another sioc:Container.
 
 eg_d1:d1_participants a catalyst:Participants;
     sioc:has_member eg_d1:account_6e5902d716fa578590a0b987c6e82a0249688e36,
@@ -153,7 +150,7 @@ eg_d1:d1_mailingList1 a assembl:MailingList, sioc:Space.
 # A post
 
 eg_d1:message_1 a sioc:Post ;
-    dcterms:created "2013-11-01T09:00:04"^^xsd:dateTimeStamp;
+    dcterms:created "2013-11-01T09:00:04"^^xsd:dateTime;
     dcterms:title "Climate change is a real problem"@eng;
     sioc:content """We need to reduce CO2 levels."""@eng;
     sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
@@ -249,30 +246,34 @@ eg_d1:idea_1 a ibis:Issue;
     dcterms:title "Stop climate change"@eng;
     dcterms:description "A longer description "@eng;
     sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
-    dcterms:created "2013-11-02T14:20:04"^^xsd:dateTimeStamp;
-    dcterms:modified "2014-01-02T11:32:17"^^xsd:dateTimeStamp;
-    sioc:has_container eg_d1:ideas.
+    dcterms:created "2013-11-02T14:20:04"^^xsd:dateTime;
+    dcterms:modified "2014-01-02T11:32:17"^^xsd:dateTime;
+    sioc:has_container <http://www.assembl.net/discussion/1/>.
 
 eg_d1:idea_2 a ibis:Position;
-    dcterms:title "We should telecommute"@eng.
+    dcterms:title "We should telecommute"@eng;
+    sioc:has_container <http://www.assembl.net/discussion/1/>.
 
 eg_d1:idealink_2_1 a ibis:PositionRespondsToIssue;
     ibis:response_position eg_d1:idea_2;
-    ibis:response_issue eg_d1:idea_1.
+    ibis:response_issue eg_d1:idea_1;
+    sioc:has_container <http://www.assembl.net/discussion/1/>.
 
 eg_d1:idea_3 a ibis:Argument;
     dcterms:title """Personal transport is a big part 
-        of fuel consumption."""@eng.
+        of fuel consumption."""@eng;
+    sioc:has_container <http://www.assembl.net/discussion/1/>.
 
 eg_d1:idealink_3_2 a ibis:ArgumentSupportsIdea;
     ibis:argument_arguing eg_d1:idea_3;
-    ibis:target_idea eg_d1:idea_2.
+    idea:target_idea eg_d1:idea_2;
+    sioc:has_container <http://www.assembl.net/discussion/1/>.
 
 # Vote
 
 eg_d1:vote1 a vote:BinaryVote;
     vote:voter eg_d1:account_6e5902d716fa578590a0b987c6e82a0249688e36;
-    dcterms:created "2013-11-02T14:20:04"^^xsd:dateTimeStamp;
+    dcterms:created "2013-11-02T14:20:04"^^xsd:dateTime;
     vote:subject eg_d1:idea_3;
     vote:positive "true"^^xsd:boolean.
 

@@ -7,6 +7,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix sioc: <http://rdfs.org/sioc/ns#> .
 @prefix sioct: <http://rdfs.org/sioc/types#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix oa: <http://www.openannotation.org/ns/> .
 @prefix pdoa: <http://purl.org/pundit/ont/ao#> .
 @prefix pdao: <http://purl.org/pundit/ont/oa#> .
@@ -44,17 +45,31 @@ catalyst:service_maps_graph
     rdfs:domain catalyst:Service;
     rdfs:range trig:Graph.
 
+catalyst:Map
+    a owl:Class;
+    owl:subClassOf idea:Map, sioc:Container.
+
+catalyst:inMap
+    a owl:Property;
+    owl:subPropertyOf idea:inMap, sioc:has_container;
+    rdfs:range catalyst:Map.
+
 catalyst:Conversation 
     a owl:Class ;
-    rdfs:comment "A conversation"@en ;
+    rdfs:comment "A conversation."@en ;
     rdfs:isDefinedBy <http://purl.org/catalyst/core#> ;
     rdfs:label "conversation"@en ;
-    owl:subClassOf sioc:Container, sioc:Space,
-    [
+    owl:subClassOf sioc:Container, sioc:Space, catalyst:Map, [
         a owl:Restriction ;
-        owl:onProperty sioc:has_part ;
-        owl:someValuesFrom catalyst:Ideas 
-    ] . 
+        owl:onProperty catalyst:participants ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ].
+
+catalyst:primaryMap
+    a owl:Property;
+    rdfs:domain catalyst:Conversation;
+    rdfs:range catalyst:Map;
+    rdfs:comment "This map is (one of ) the focus of this conversation.".
 
 catalyst:Ideas
     a owl:Class;
@@ -63,7 +78,8 @@ catalyst:Ideas
         a owl:Restriction;
         owl:onProperty sioc:container_of ;
         owl:allValuesFrom catalyst:GenericIdea
-    ].
+    ];
+    vs:term_status "archaic" .
 
 catalyst:Messages
     a owl:Class;
@@ -72,7 +88,8 @@ catalyst:Messages
         a owl:Restriction;
         owl:onProperty sioc:container_of ;
         owl:allValuesFrom catalyst:Post
-    ].
+    ];
+    vs:term_status "archaic" .
 
 catalyst:ParticipantGroup
     a owl:Class;
@@ -216,15 +233,7 @@ catalyst:history_service
 catalyst:service_maps_graph owl:propertyChainAxiom (
     [owl:inverseOf catalyst:history_service] catalyst:history_graph).
 
-catalyst:PseudonymAccount
-    a owl:Class;
-    owl:subClassOf sioc:UserAccount.
-
-catalyst:PseudonymAgent
-    a owl:Class;
-    owl:subClassOf foaf:Agent.
-
 catalyst:pseudonym_scope
     a owl:ObjectProperty;
-    rdfs:domain [owl:unionOf (catalyst:PseudonymAgent catalyst:PseudonymAccount)];
+    rdfs:domain [owl:unionOf (foaf:Agent sioc:UserAccount)];
     rdfs:range catalyst:Conversation.
