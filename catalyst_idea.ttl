@@ -82,7 +82,7 @@ idea:hasPart
         ).
 
 idea:isPartOf
-    owl:subPropertyOf idea:included_in, dcterms:isPartOf;
+    owl:subPropertyOf idea:includedIn, dcterms:isPartOf;
     owl:inverseOf idea:hasPart;
     owl:propertyChainAxiom (
         [owl:inverseOf idea:source_idea;
