@@ -83,4 +83,4 @@ ibis:applicable_issue
 
 ibis:IssueQuestions
     a owl:Class;
-    owl:subClassOf idea:IssueAppliesTo.
+    owl:subClassOf ibis:IssueAppliesTo.

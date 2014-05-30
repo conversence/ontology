@@ -1,4 +1,5 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix pa_ibis: <http://privatealpha.com/ontology/ibis/1#> .
 @prefix idea: <http://purl.org/catalyst/idea#> .
 @prefix ibis: <http://purl.org/catalyst/ibis#> .
@@ -17,13 +18,16 @@ pa_ibis:responds-to owl:equivalentProperty [owl:propertyChainAxiom (
     [owl:inverseOf ibis:response_position] ibis:response_issue)].
 
 pa_ibis:supports owl:equivalentProperty [owl:propertyChainAxiom (
-    [owl:inverseOf ibis:argument_supporting] ibis:idea_argued)].
+    [owl:inverseOf ibis:argument_arguing; rdfs:range ibis:ArgumentSupportsIdea ]
+    ibis:target_idea)].
 
 pa_ibis:opposes owl:equivalentProperty [owl:propertyChainAxiom (
-    [owl:inverseOf ibis:argument_opposing] ibis:idea_argued)].
-
-pa_ibis:questions owl:equivalentProperty [owl:propertyChainAxiom (
-    [owl:inverseOf ibis:issue_questioning] ibis:questioned_by_issue)].
+    [owl:inverseOf ibis:argument_arguing; rdfs:range ibis:ArgumentOpposesIdea ]
+    ibis:idea_argued)].
 
 pa_ibis:suggests owl:equivalentProperty [owl:propertyChainAxiom (
-    [owl:inverseOf ibis:suggesting_issue] ibis:issue_suggested)].
+    [owl:inverseOf ibis:applicable_issue] idea:target_idea)].
+
+pa_ibis:questions owl:equivalentProperty [owl:propertyChainAxiom (
+    [owl:inverseOf ibis:applicable_issue; rdfs:range ibis:IssueQuestions]
+    idea:target_idea)].
