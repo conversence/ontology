@@ -49,6 +49,10 @@ assembl:postLinkedToIdea a owl:ObjectProperty;
     owl:subPropertyOf assembl:relatedToIdea;
     rdfs:domain catalyst:Post.
 
+assembl:postHiddenLinkedToIdea
+    owl:subPropertyOf assembl:relatedToIdea;
+    rdfs:domain catalyst:Post.
+
 assembl:postDelinkedToIdea a owl:ObjectProperty;
     owl:subPropertyOf assembl:relatedToIdea;
     rdfs:domain catalyst:Post.
