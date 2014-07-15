@@ -1,6 +1,7 @@
 #!/usr/bin/python
-from sys import argv
+import sys
 from os.path import abspath
+from argparse import ArgumentParser, FileType
 
 from simplejson import load, dump
 from rdflib import Graph, ConjunctiveGraph
@@ -28,19 +29,25 @@ npm.bind("eg_d1", "http://www.assembl.net/discussion/1/")
 npm.bind("kmieg", "http://maptesting.kmi.open.ac.uk/api/")
 npm.bind("kmiegnodes", "http://maptesting.kmi.open.ac.uk/api/nodes/")
 
-def convert(src, dest, format='trig'):
-    quads = jsonld.to_rdf('file:'+src, {'format': 'application/nquads'})
+def convert(input_fname, output, format='trig'):
+    quads = jsonld.to_rdf('file:'+input_fname, {'format': 'application/nquads'})
     if format == 'nquads':
-        with open(dest, 'w') as f:
-            f.write(quads.encode('utf-8'))
+        output.write(quads.encode('utf-8'))
     else:
         g = ConjunctiveGraph()
         g.namespace_manager=npm
         g.parse(data=quads, format='nquads')
         for c in g.contexts():
             c.namespace_manager=npm
-        with open(dest, 'w') as f:
-            f.write(g.serialize(format=format))
+        output.write(g.serialize(format=format))
 
 if __name__ == '__main__':
-    convert(*argv[1:])
+    parser = ArgumentParser()
+    parser.add_argument('--format', '-f', default='trig',
+        help="The output format (as defined in rdflib)")
+    parser.add_argument('--output', '-o', type=FileType('w'), default=sys.stdout,
+        help="the output file")
+    parser.add_argument('input_fname', help="the input file")
+    args = parser.parse_args()
+    convert(**vars(args))
+    args.output.close()
