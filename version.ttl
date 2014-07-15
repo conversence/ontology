@@ -16,7 +16,7 @@
 version:Operation
     a owl:Class.
 
-version:affected_object;
+version:affected_object
     a owl:ObjectProperty;
     rdfs:domain version:Operation.
 
