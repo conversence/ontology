@@ -21,6 +21,7 @@
     "Graph": "trig:Graph",
     
     "title": "dcterms:title",
+    "alternative": "dcterms:alternative",
     "dclanguage": "dcterms:language",
     "format": "dcterms:format",
     "conformsTo": "dcterms:conformsTo",
@@ -189,7 +190,7 @@
     "extractRelevantToIdea": {"@id": "catalyst:extractRelevantToIdea", "@type": "@id"},
     "expressesIdea": {"@id": "catalyst:expressesIdea", "@type": "@id"},
     "Ideas": "catalyst:Ideas",
-    "relevantToDiscussion": {"@id": "catalyst:relevantToDiscussion", "@type": "@id"},
+    "relevantToConversation": {"@id": "catalyst:relevantToConversation", "@type": "@id"},
 
     "participants": {"@id": "catalyst:participants", "@type": "@id"},
     "uses_source": {"@id": "catalyst:uses_source", "@type": "@id"},
@@ -210,7 +211,7 @@
 
 
     "MailingList": "assembl:MailingList",
-    "link_order": {"@id": "assembl:link_order", "@type": "xsd:double"},
+    "link_order": {"@id": "assembl:link_order", "@type": "xsd:float"},
     "db_id": {"@id": "assembl:db_id", "@type": "xsd:integer"},
     "has_origin": {"@id": "assembl:has_origin", "@type": "@id"},
     "postExtractRelatedToIdea": {"@id": "assembl:postExtractRelatedToIdea", "@type": "@id"},
