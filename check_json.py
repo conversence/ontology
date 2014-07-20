@@ -2,7 +2,7 @@
 from argparse import ArgumentParser
 from os.path import join, dirname
 
-from simplejson import load
+from json import load
 
 def check_keys(json, context):
     suspicious = set()
