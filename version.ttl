@@ -5,7 +5,10 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix catalyst: <http://purl.org/catalyst/core#> .
+@prefix cs: <http://purl.org/vocab/changeset/schema#> .
+@prefix tb_change: <http://topbraid.org/change#> .
 @prefix version: <http://purl.org/catalyst/version#> .
 
 <http://purl.org/catalyst/version#> a owl:Ontology;
@@ -13,47 +16,54 @@
     the versioned objects. This is mandatory if the version information
     includes ObjectSnapshot instances."""@eng.
 
-version:Operation
-    a owl:Class.
+version:Update
+    a owl:Class;
+    owl:equivalentClass tb_change:Change, cs:ChangeSet.
 
 version:affected_object
     a owl:ObjectProperty;
-    rdfs:domain version:Operation.
+    rdfs:domain version:Update.
 
 version:what
     a owl:FunctionalProperty;
     owl:subPropertyOf version:affected_object;
-    rdfs:domain version:Operation.
+    rdfs:domain version:Update;
+    owl:equivalentProperty cs:subjectOfChange.
 
 version:operations a owl:ObjectProperty;
     owl:inverseOf version:what.
 
 version:revision
     a owl:DatatypeProperty, owl:FunctionalProperty;
-    rdfs:domain version:Operation;
+    rdfs:domain version:Update;
     rdfs:range xsd:integer;
     rdfs:comment """Changes may optionally have a number.
     Then, change order must determine History sequence order."""@eng.
 
 version:when
     a owl:DatatypeProperty, owl:FunctionalProperty;
-    rdfs:domain version:Operation;
+    rdfs:domain version:Update;
     rdfs:range xsd:dateTimeStamp;
     rdfs:comment """Timestamp is mandatory. If present, 
-    revision numbers have precedence over timestamps."""@eng.
+    revision numbers have precedence over timestamps."""@eng;
+    owl:equivalentProperty tb_change:timeStamp.
 
 version:who
     a owl:ObjectProperty, owl:FunctionalProperty;
-    rdfs:domain version:Operation;
-    rdfs:range sioc:UserAccount.
+    rdfs:domain version:Update;
+    rdfs:range sioc:UserAccount.  # Or sioc:User?
+
+cs:creatorName owl:equivalentProperty [
+    owl:propertyChainAxiom (
+        version:who sioc:account_of foaf:name)].
 
 version:Delete
     a owl:Class;
-    owl:subClassOf version:Operation.
+    owl:subClassOf version:Update.
 
 version:Create
     a owl:Class;
-    owl:subClassOf version:Operation.
+    owl:subClassOf version:Update.
 
 version:create_from 
     a owl:ObjectProperty;
@@ -61,15 +71,20 @@ version:create_from
     rdfs:comment """Objects created through cloning and merging should 
     retain links to their source using this property."""@eng.
 
-version:Update
-    a owl:Class;
-    owl:subClassOf version:Operation.
-
 version:updated_value a owl:ObjectProperty;
     rdfs:domain version:Update;
     rdfs:range rdf:Statement;
-    rdfs:comment """Optional. Updates can have either updated_values 
+    owl:equivalentProperty cs:statement;
+    rdfs:comment """Optional. Updates can have either updated_value
         or a snapshot (see later.)"""@eng.
+
+version:values_added a owl:ObjectProperty;
+    owl:subPropertyOf version:updated_value;
+    owl:equivalentProperty cs:addition, tb_change:added.
+
+version:values_removed a owl:ObjectProperty;
+    owl:subPropertyOf version:updated_value;
+    owl:equivalentProperty cs:removal, tb_change:deleted.
 
 rdf:subject owl:propertyChainAxiom (
     [owl:inverseOf version:updated_value] version:what).
@@ -88,12 +103,6 @@ version:annotation_target
     rdfs:comment """Note that the 'what' property refers to the 
         created object, which may be the annotating object 
         or a link between that object and the annotation target"""@eng.
-
-version:create_from 
-    a owl:ObjectProperty;
-    owl:subPropertyOf dcterms:source;
-    rdfs:comment """Objects created through cloning and merging
-        should retain links to their source using this property."""@eng.
 
 version:StateChange
     a owl:Class;
