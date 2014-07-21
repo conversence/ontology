@@ -1,20 +1,17 @@
 #!/usr/bin/python
-from sys import argv
-from os.path import abspath
+import sys
 import re
+from argparse import ArgumentParser, FileType
 
 from simplejson import load, dump
 from rdflib import ConjunctiveGraph, BNode
 from pyld import jsonld
 
 
-def convert(context, src, dest):
-    #context = abspath(context)
-    with open(context) as f:
-        context = load(f)
+def convert(context, input, output, input_format):
+    context = load(context)
     g = ConjunctiveGraph()
-    with open(src) as f:
-        g.parse(data=f.read(), format='trig')
+    g.parse(data=input.read(), format=input_format)
     # It should be as simple as
     # f.write(g.serialize(format='json-ld', indent=2, context=context))
     # Bug in rdflib: Above loses the TextPositionSelector.
@@ -30,8 +27,20 @@ def convert(context, src, dest):
     jsonc = jsonld.compact(json, context)
     # context does not have to be included
     jsonc['@context'] = 'http://purl.org/catalyst/jsonld'
-    with open(dest, 'w') as f:
-        dump(jsonc, f, indent="  ")
+    dump(jsonc, output, indent="  ")
 
 if __name__ == '__main__':
-    convert(*argv[1:])
+    parser = ArgumentParser()
+    parser.add_argument('--context', '-c', type=FileType('r'),
+        help="The context file")
+    parser.add_argument('--format', '-f', default='trig',
+        help="The input format (as defined in rdflib)")
+    parser.add_argument('--output', '-o', type=FileType('w'),
+        default=sys.stdout, help="the output file")
+    parser.add_argument('input_fname', help="the input file", type=FileType('r'))
+    args = parser.parse_args()
+    context = args.context
+    if not context:
+        import requests
+        context = requests.get('http://purl.org/catalyst/jsonld')
+    convert(context, args.input_fname, args.output, args.format)
