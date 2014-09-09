@@ -35,7 +35,7 @@ idea:source_idea
     rdfs:domain idea:DirectedIdeaRelation;
     rdfs:range idea:GenericIdeaNode.
 
-idea:destination_idea
+idea:target_idea
     a owl:ObjectProperty;
     owl:subPropertyOf idea:relates_idea;
     rdfs:domain idea:DirectedIdeaRelation;
@@ -51,7 +51,7 @@ idea:InclusionRelation
 idea:includes
     a owl:AsymmetricProperty;
     owl:propertyChainAxiom (
-        [owl:inverseOf idea:destination_idea;
+        [owl:inverseOf idea:target_idea;
         rdfs:range idea:InclusionRelation]
         idea:source_idea
         ).
@@ -63,7 +63,7 @@ idea:includedIn
     owl:propertyChainAxiom (
         [owl:inverseOf idea:source_idea;
         rdfs:range idea:InclusionRelation]
-        idea:destination_idea
+        idea:target_idea
         ).
 
 idea:WholePartRelation
@@ -76,7 +76,7 @@ idea:WholePartRelation
 idea:hasPart
     owl:subPropertyOf idea:includes, dcterms:hasPart;
     owl:propertyChainAxiom (
-        [owl:inverseOf idea:destination_idea;
+        [owl:inverseOf idea:target_idea;
         rdfs:range idea:WholePartRelation]
         idea:source_idea
         ).
@@ -87,7 +87,7 @@ idea:isPartOf
     owl:propertyChainAxiom (
         [owl:inverseOf idea:source_idea;
         rdfs:range idea:WholePartRelation]
-        idea:destination_idea
+        idea:target_idea
         ).
 
 idea:partOf owl:inverseOf idea:hasPart .

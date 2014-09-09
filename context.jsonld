@@ -49,7 +49,6 @@
     "WholePartRelation": "idea:WholePartRelation",
     "abstracts": {"@id": "idea:abstracts", "@type": "@id"},
     "compares": {"@id": "idea:compares", "@type": "@id"},
-    "destination_idea": {"@id": "idea:destination_idea", "@type": "@id"},
     "ideaHasPart": {"@id": "idea:hasPart", "@type": "@id"},
     "ideaIsPartOf": {"@id": "idea:isPartOf", "@type": "@id"},
     "includes": {"@id": "idea:includes", "@type": "@id"},
