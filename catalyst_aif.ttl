@@ -50,8 +50,3 @@ ibis:Reference owl:subClassOf aif:Statement.
 
 ibis:Decision owl:subClassOf aif:DialogueScheme_Application. # and Preference?
     # Decision --relevant to-->Issue, Decision--hasConclusion-->Position
-
-ibis:argument_arguing rdfs:subPropertyOf aif:source_idea.
-
-ibis:position_argued rdfs:subPropertyOf aif:target_idea.
-
