@@ -5,7 +5,7 @@
 # https://github.com/digitalbazaar/pyld (pip install pyld)
 #
 # Ubuntu:  
-# sudo apt-get install python-pygraphviz raptor2-utils
+# sudo apt-get install python-pygraphviz raptor2-utils python-simplejson
 # sudo pip install 'rdflib>=4' pyld
 
 
