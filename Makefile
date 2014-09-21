@@ -5,8 +5,8 @@
 # https://github.com/digitalbazaar/pyld (pip install pyld)
 #
 # Ubuntu:  
-# apt-get install python-pygraphviz raptor2-utils
-# sudo pip install rdflib>=4 pyld
+# sudo apt-get install python-pygraphviz raptor2-utils
+# sudo pip install 'rdflib>=4' pyld
 
 
 dotfiles = ibis.dot version.dot aif.dot vote.dot sioc.dot idea.dot assembl.dot ibis_idea.dot ibis_aif.dot ibis_pa.dot catalyst_core.dot reln_aif.dot reln_pa_ibis.dot
@@ -16,7 +16,7 @@ pdf_files  := $(subst .dot,.pdf,$(dotfiles))
 all: $(dotfiles) example.json
 
 clean:
-	rm -f $(dotfiles) $(pdf_files) example.json foaf.ttl pa_ibis.ttl sioc.ttl sioc.rdf.xml foaf.ttl pa_ibis.ttl
+	rm -f $(dotfiles) $(pdf_files) example.json foaf.ttl pa_ibis.ttl sioc.ttl sioc.rdf.xml foaf.ttl pa_ibis.ttl foaf.rdf.xml
 
 
 ibis.dot: catalyst_ibis.ttl $(sourcefiles)
