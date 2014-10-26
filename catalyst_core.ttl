@@ -118,7 +118,7 @@ catalyst:Idea
     rdfs:comment "An idea"@en ;
     rdfs:isDefinedBy <http://purl.org/catalyst/core#> ;
     rdfs:label "Idea"@en ;
-    owl:subClassOf catalyst:Item, idea:GenericIdea. 
+    owl:subClassOf catalyst:Item, idea:GenericIdeaNode.
     # To be considered: owl:Thing , dul:Entity, cohere:abstract_object,
     # aif:Node, cohere:abstract_idea?, aif:I-node? skos:Concept??
 

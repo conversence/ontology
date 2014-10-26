@@ -64,3 +64,6 @@ assembl:postExtractRelatedToIdea a owl:ObjectProperty;
     owl:subPropertyOf assembl:postRelatedToIdea;
     owl:propertyChainAxiom (
         [owl:inverseOf catalyst:ExcerptTarget] catalyst:extractRelevantToIdea).
+
+assembl:RootIdea a owl:Class;
+    owl:subClassOf idea:GenericIdeaNode.

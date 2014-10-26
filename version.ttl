@@ -6,7 +6,6 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix sioc: <http://rdfs.org/sioc/ns#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix catalyst: <http://purl.org/catalyst/core#> .
 @prefix cs: <http://purl.org/vocab/changeset/schema#> .
 @prefix tb_change: <http://topbraid.org/change#> .
 @prefix version: <http://purl.org/catalyst/version#> .

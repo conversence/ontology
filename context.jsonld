@@ -215,6 +215,9 @@
     "has_origin": {"@id": "assembl:has_origin", "@type": "@id"},
     "postExtractRelatedToIdea": {"@id": "assembl:postExtractRelatedToIdea", "@type": "@id"},
     "postLinkedToIdea": {"@id": "assembl:postLinkedToIdea", "@type": "@id"},
+    "postRelatedToIdea": {"@id": "assembl:postRelatedToIdea", "@type": "@id"},
+    "RootIdea": "assembl:RootIdea",
+    "PostSource": "assembl:PostSource",
 
     "Annotation": "oa:Annotation",
     "SpecificResource": "oa:SpecificResource",
