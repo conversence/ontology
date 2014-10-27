@@ -24,7 +24,7 @@
     "alternative": "dcterms:alternative",
     "dclanguage": "dcterms:language",
     "format": "dcterms:format",
-    "conformsTo": "dcterms:conformsTo",
+    "conformsTo": {"@id":"dcterms:conformsTo", "@type": "@id"},
     "created": {"@id": "dcterms:created", "@type": "xsd:dateTime"},
     "date": {"@id": "dcterms:date", "@type": "xsd:date"},
     "description": "dcterms:description",
