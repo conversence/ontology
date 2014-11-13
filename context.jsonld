@@ -214,6 +214,7 @@
     "db_id": {"@id": "assembl:db_id", "@type": "xsd:integer"},
     "has_origin": {"@id": "assembl:has_origin", "@type": "@id"},
     "postExtractRelatedToIdea": {"@id": "assembl:postExtractRelatedToIdea", "@type": "@id"},
+    "resourceExpressesIdea": {"@id": "assembl:resourceExpressesIdea", "@type": "@id"},
     "postLinkedToIdea": {"@id": "assembl:postLinkedToIdea", "@type": "@id"},
     "postRelatedToIdea": {"@id": "assembl:postRelatedToIdea", "@type": "@id"},
     "RootIdea": "assembl:RootIdea",

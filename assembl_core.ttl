@@ -65,5 +65,9 @@ assembl:postExtractRelatedToIdea a owl:ObjectProperty;
     owl:propertyChainAxiom (
         [owl:inverseOf catalyst:ExcerptTarget] catalyst:extractRelevantToIdea).
 
+# This is an shortcut that repeats the catalyst:expressesIdea in the main graph.
+assembl:resourceExpressesIdea a owl:ObjectProperty;
+    owl:subPropertyOf catalyst:expressesIdea.
+
 assembl:RootIdea a owl:Class;
     owl:subClassOf idea:GenericIdeaNode.
