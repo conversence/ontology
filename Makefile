@@ -66,15 +66,6 @@ pdf: $(pdf_files)
 %.json: %.trig context.jsonld
 	python save_jsonld.py -c context.jsonld -o $@ $<
 
-pa_ibis.ttl:
-	curl -o $@ http://privatealpha.com/ontology/ibis/1
-
-sioc.rdf.xml:
-	curl -o $@ http://rdfs.org/sioc/ns
-
-foaf.rdf.xml:
-	curl -H 'Accept: application/rdf+xml' -o $@ http://xmlns.com/foaf/0.1/
-
 %.ttl: %.rdf.xml
 	rapper -i rdfxml -o turtle $< > $@
 

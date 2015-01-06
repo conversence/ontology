@@ -1,0 +1,232 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://www.w3.org/1999/xhtml> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix ibis: <http://privatealpha.com/ontology/ibis/1#> .
+
+<http://danny.ayers.name/index.rdf#me>
+    foaf:name "Danny Ayers"@en .
+
+<http://doriantaylor.com/person/dorian-taylor#me>
+    foaf:name "Dorian Taylor"@en .
+
+<http://hyperdata.org/xmlns/ibis/>
+    dct:creator <http://danny.ayers.name/index.rdf#me> .
+
+<http://privatealpha.com/ontology/ibis/1>
+    a bibo:Webpage ;
+    rdfs:seeAlso <http://dublincore.org/documents/dcmi-terms/>, <http://en.wikipedia.org/wiki/Issue-Based_Information_System>, <http://www.cc.gatech.edu/~ellendo/rittel/rittel-issues.pdf>, <http://www.cs.hut.fi/Opinnot/T-93.850/2005/Papers/gIBIS1988-conklin.pdf>, <http://www.w3.org/TR/prov-o/> .
+
+<http://privatealpha.com/ontology/ibis/1#>
+    dct:created "2012-12-11T22:22:53-0800"^^xsd:dateTime ;
+    dct:creator <http://doriantaylor.com/person/dorian-taylor#me> ;
+    dct:modified "2012-12-12T16:04:50-0800"^^xsd:dateTime ;
+    dct:title "IBIS (bis) Vocabulary"@en ;
+    bibo:uri <http://privatealpha.com/ontology/ibis/1#> ;
+    vann:preferredNamespacePrefix "ibis"^^xsd:string ;
+    a owl:Ontology ;
+    rdfs:comment "This document specifies a vocabulary for describing an IBIS (issue-based information system)."@en ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "IBIS"@en ;
+    rdfs:seeAlso <http://hyperdata.org/xmlns/ibis/>, <http://www.cs.hut.fi/Opinnot/T-93.850/2005/Papers/gIBIS1988-conklin.pdf> ;
+    owl:imports <http://www.w3.org/2004/02/skos/core#> .
+
+ibis:Argument
+    a owl:Class ;
+    rdfs:comment "An argument supports or refutes a position."@en ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "Argument"@en ;
+    rdfs:subClassOf skos:Concept ;
+    owl:disjointWith ibis:Issue, ibis:Position .
+
+ibis:Issue
+    a owl:Class ;
+    rdfs:comment "An issue is believed by one or more agents to be significant."@en ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "Issue"@en ;
+    rdfs:subClassOf skos:Concept ;
+    owl:disjointWith ibis:Argument, ibis:Position .
+
+ibis:Position
+    a owl:Class ;
+    rdfs:comment "A position asserts what should be done about an issue."@en ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "Position"@en ;
+    rdfs:subClassOf skos:Concept ;
+    owl:disjointWith ibis:Argument, ibis:Issue .
+
+ibis:concerns
+    a owl:ObjectProperty ;
+    rdfs:comment "The subject is an issue concerning the object, which can be any resource."@en ;
+    rdfs:domain ibis:Issue ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "concerns"@en .
+
+ibis:endorsed-by
+    a owl:ObjectProperty ;
+    rdfs:comment "A concept can be endorsed by an agent without said agent having mentioned or advanced it initially, and without any additional comment."@en ;
+    rdfs:domain skos:Concept ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "endorsed by"@en ;
+    rdfs:range foaf:Agent ;
+    owl:inverseOf ibis:endorses ;
+    skos:note "This term, along with ibis:endorses, enables an agent to signal its agreement with a concept. To signal disagreement, explain why with an ibis:Argument that ibis:opposes the concept."@en .
+
+ibis:endorses
+    a owl:ObjectProperty ;
+    rdfs:comment "An agent can endorse a concept without having initially mentioned or advanced it, and without any additional comment."@en ;
+    rdfs:domain foaf:Agent ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "endorses"@en ;
+    rdfs:range skos:Concept ;
+    owl:inverseOf ibis:endorsed-by ;
+    skos:note "This term, along with ibis:endorsed-by, enables an agent to signal its agreement with a concept. To signal disagreement, explain why with an ibis:Argument that ibis:opposes the concept."@en .
+
+ibis:generalizes
+    a owl:ObjectProperty ;
+    rdfs:comment "The subject issue is a more generic form of the object."@en ;
+    rdfs:domain ibis:Issue ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "generalizes"@en ;
+    rdfs:range ibis:Issue ;
+    rdfs:subPropertyOf skos:narrower ;
+    owl:inverseOf ibis:specializes ;
+    skos:note "The super-property skos:narrower asserts that the object is narrower than the subject, while the subject of ibis:generalizes is more general than the object."@en .
+
+ibis:opposed-by
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates a subject position opposed by an object argument."@en ;
+    rdfs:domain ibis:Position ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "opposed by"@en ;
+    rdfs:range ibis:Argument ;
+    owl:inverseOf ibis:opposes .
+
+ibis:opposes
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates a subject argument that opposes an object position."@en ;
+    rdfs:domain ibis:Argument ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "opposes"@en ;
+    rdfs:range ibis:Position ;
+    owl:inverseOf ibis:opposed-by .
+
+ibis:questioned-by
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates a belief called into question by an issue."@en ;
+    rdfs:domain skos:Concept ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "questioned by"@en ;
+    rdfs:range ibis:Issue ;
+    owl:inverseOf ibis:questions .
+
+ibis:questions
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates an issue that raises doubt on a belief."@en ;
+    rdfs:domain ibis:Issue ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "questions"@en ;
+    rdfs:range skos:Concept ;
+    owl:inverseOf ibis:questioned-by .
+
+ibis:replaced-by
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates when an issue is replaced by another issue."@en ;
+    rdfs:domain ibis:Issue ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "replaced by"@en ;
+    rdfs:range ibis:Issue ;
+    rdfs:subPropertyOf dct:isReplacedBy ;
+    owl:inverseOf ibis:replaces .
+
+ibis:replaces
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates when an issue replaces another issue."@en ;
+    rdfs:domain ibis:Issue ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "replaces"@en ;
+    rdfs:range ibis:Issue ;
+    rdfs:subPropertyOf dct:replaces ;
+    owl:inverseOf ibis:replaced-by .
+
+ibis:responds-to
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates an issue to which the subject position responds."@en ;
+    rdfs:domain ibis:Position ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "responds to"@en ;
+    rdfs:range ibis:Issue ;
+    owl:inverseOf ibis:response .
+
+ibis:response
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates a position that responds to the subject issue."@en ;
+    rdfs:domain ibis:Issue ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "response"@en ;
+    rdfs:range ibis:Position ;
+    owl:inverseOf ibis:responds-to .
+
+ibis:specializes
+    a owl:ObjectProperty ;
+    rdfs:comment "The subject issue is a more specific form of the object."@en ;
+    rdfs:domain ibis:Issue ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "specializes"@en ;
+    rdfs:range ibis:Issue ;
+    rdfs:subPropertyOf skos:broader ;
+    owl:inverseOf ibis:generalizes ;
+    skos:note "The super-property skos:broader asserts that the object is broader than the subject, while the subject of ibis:specializes is more specific than the object."@en .
+
+ibis:suggested-by
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates when the subject issue is suggested by the object belief."@en ;
+    rdfs:domain ibis:Issue ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "suggested by"@en ;
+    rdfs:range skos:Concept ;
+    owl:inverseOf ibis:suggests .
+
+ibis:suggests
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates when the subject belief suggests the object issue."@en ;
+    rdfs:domain skos:Concept ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "suggests"@en ;
+    rdfs:range ibis:Issue ;
+    owl:inverseOf ibis:suggested-by .
+
+ibis:supported-by
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates a subject position supported by an object argument."@en ;
+    rdfs:domain ibis:Position ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "supported by"@en ;
+    rdfs:range ibis:Argument ;
+    owl:inverseOf ibis:supports .
+
+ibis:supports
+    a owl:ObjectProperty ;
+    rdfs:comment "Indicates a subject argument that supports an object position."@en ;
+    rdfs:domain ibis:Argument ;
+    rdfs:isDefinedBy <http://privatealpha.com/ontology/ibis/1#> ;
+    rdfs:label "supports"@en ;
+    rdfs:range ibis:Position ;
+    owl:inverseOf ibis:supported-by .
+
+<http://www.cc.gatech.edu/~ellendo/rittel/rittel-issues.pdf>
+    dct:creator "Horst Rittel"@en, "Werner Kunz"@en ;
+    dct:date "1970"@en ;
+    dct:title "Issues as Elements of Information Systems"@en .
+
+<http://www.cs.hut.fi/Opinnot/T-93.850/2005/Papers/gIBIS1988-conklin.pdf>
+    dct:creator "Jeff Conklin"@en, "Michael L. Begeman"@en ;
+    dct:date "1988"@en ;
+    dct:title "gIBIS: a hypertext tool for exploratory policy discussion"@en .
+
