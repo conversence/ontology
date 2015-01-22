@@ -212,6 +212,7 @@
     "MailingList": "assembl:MailingList",
     "link_order": {"@id": "assembl:link_order", "@type": "xsd:float"},
     "db_id": {"@id": "assembl:db_id", "@type": "xsd:integer"},
+    "in_conversation": {"@id": "assembl:in_conversation", "@type": "@id"},
     "has_origin": {"@id": "assembl:has_origin", "@type": "@id"},
     "postExtractRelatedToIdea": {"@id": "assembl:postExtractRelatedToIdea", "@type": "@id"},
     "resourceExpressesIdea": {"@id": "assembl:resourceExpressesIdea", "@type": "@id"},

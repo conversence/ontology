@@ -27,6 +27,9 @@
 
 assembl:db_id a owl:LiteralProperty.
 
+assembl:in_conversation a owl:ObjectProperty;
+    rdfs:range catalyst:Conversation.
+
 assembl:link_order a owl:LiteralProperty;
     rdfs:domain idea:IdeaRelation;
     rdfs:range xsd:number.
