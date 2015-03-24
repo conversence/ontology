@@ -94,6 +94,7 @@
     "fname": "foaf:name",
     "homepage": "foaf:homepage",
     "mbox": "foaf:mbox",
+    "account": {"@id": "foaf:account", "@type": "@id"},
 
     "Community": "sioc:Community",
     "Container": "sioc:Container",
