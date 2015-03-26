@@ -92,8 +92,10 @@
     "familyName": "foaf:familyName",
     "firstName": "foaf:firstName",
     "fname": "foaf:name",
-    "homepage": "foaf:homepage",
-    "mbox": "foaf:mbox",
+    "homepage": {"@id": "foaf:homepage", "@type": "@id"},
+    "img": {"@id": "foaf:img", "@type": "@id"},
+    "depiction":  {"@id": "foaf:depiction", "@type": "@id"},
+    "mbox": {"@id": "foaf:mbox", "@type": "@id"},
     "account": {"@id": "foaf:account", "@type": "@id"},
 
     "Community": "sioc:Community",
