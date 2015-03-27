@@ -50,6 +50,8 @@ idea:InclusionRelation
 
 idea:includes
     a owl:AsymmetricProperty;
+    rdfs:domain idea:GenericIdeaNode;
+    rdfs:range idea:GenericIdeaNode;
     owl:propertyChainAxiom (
         [owl:inverseOf idea:target_idea;
         rdfs:range idea:InclusionRelation]
@@ -60,6 +62,8 @@ idea:includes
 idea:includedIn
     a owl:AsymmetricProperty;
     owl:inverseOf idea:includes;
+    rdfs:domain idea:GenericIdeaNode;
+    rdfs:range idea:GenericIdeaNode;
     owl:propertyChainAxiom (
         [owl:inverseOf idea:source_idea;
         rdfs:range idea:InclusionRelation]
@@ -75,6 +79,8 @@ idea:WholePartRelation
 
 idea:hasPart
     owl:subPropertyOf idea:includes, dcterms:hasPart;
+    rdfs:domain idea:GenericIdeaNode;
+    rdfs:range idea:GenericIdeaNode;
     owl:propertyChainAxiom (
         [owl:inverseOf idea:target_idea;
         rdfs:range idea:WholePartRelation]
@@ -84,14 +90,17 @@ idea:hasPart
 idea:isPartOf
     owl:subPropertyOf idea:includedIn, dcterms:isPartOf;
     owl:inverseOf idea:hasPart;
+    rdfs:domain idea:GenericIdeaNode;
+    rdfs:range idea:GenericIdeaNode;
     owl:propertyChainAxiom (
         [owl:inverseOf idea:source_idea;
         rdfs:range idea:WholePartRelation]
         idea:target_idea
         ).
 
-idea:partOf owl:inverseOf idea:hasPart .
-
+idea:Question
+    a owl:Class;
+    rdfs:subClassOf idea:DirectedIdeaRelation.
 
 #map 
 

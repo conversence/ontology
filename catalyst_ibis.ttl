@@ -14,7 +14,7 @@
 
 ibis:Issue
     a owl:Class;
-    owl:subClassOf idea:Question.
+    owl:subClassOf idea:GenericIdeaNode.
 
 ibis:Position
     a owl:Class;
@@ -31,7 +31,7 @@ ibis:Reference
 
 ibis:Decision
     a owl:Class;
-    owl:subClassOf idea:GenericIdeaNode.
+    owl:subClassOf ibis:Position.
 
 ibis:PositionRespondsToIssue
     a owl:Class;
@@ -66,6 +66,7 @@ ibis:ArgumentSupportsIdea
 ibis:ArgumentOpposesIdea
     a owl:Class;
     owl:subClassOf ibis:ArgumentApplication.
+    # TODO: ensure that the target is an idea
 
 #suggests
 
