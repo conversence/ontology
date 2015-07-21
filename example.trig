@@ -63,8 +63,8 @@ eg_site:user_benoitg a sioc:UserAccount;
         version:snapshot [
             a sioc:Post, version:ObjectSnapshot ;
             dcterms:created "2013-11-01T09:00:04"^^xsd:dateTime;
-            dcterms:title "Climate change is a problem"@eng;
-            sioc:content """Let's do something draft placeholder"""@eng;
+            dcterms:title "Climate change is a problem"@en;
+            sioc:content """Let's do something draft placeholder"""@en;
             sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
             sioc:has_container eg_d1:forum;
             version:snapshot_of eg_d1:message_1
@@ -79,13 +79,13 @@ eg_site:user_benoitg a sioc:UserAccount;
             a rdf:Statement;
             rdf:subject eg_d1:message_1;
             rdf:predicate dcterms:title;
-            rdf:object "Climate change is a real problem"@eng
+            rdf:object "Climate change is a real problem"@en
         ];
         version:updated_value [
             a rdf:Statement;
             rdf:subject eg_d1:message_1;
             rdf:predicate sioc:content;
-            rdf:object "We need to reduce CO2 levels."@eng
+            rdf:object "We need to reduce CO2 levels."@en
         ].
     eg_d1:event3
         a version:ReadStatusChange;
@@ -102,8 +102,8 @@ eg_site:user_benoitg a sioc:UserAccount;
         version:tombstone [
             a sioc:Post, version:Tombstone ;
             dcterms:created "2013-11-01T09:00:04"^^xsd:dateTime;
-            dcterms:title "Climate change is a real problem"@eng;
-            sioc:content """We need to reduce CO2 levels."""@eng;
+            dcterms:title "Climate change is a real problem"@en;
+            sioc:content """We need to reduce CO2 levels."""@en;
             sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
             sioc:has_container eg_d1:forum;
             version:snapshot_of eg_d1:message_1
@@ -151,15 +151,15 @@ eg_d1:d1_mailingList1 a assembl:MailingList, sioc:Space.
 
 eg_d1:message_1 a sioc:Post ;
     dcterms:created "2013-11-01T09:00:04"^^xsd:dateTime;
-    dcterms:title "Climate change is a real problem"@eng;
-    sioc:content """We need to reduce CO2 levels."""@eng;
+    dcterms:title "Climate change is a real problem"@en;
+    sioc:content """We need to reduce CO2 levels."""@en;
     sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
     sioc:addressed_to "discussion1@assembl.net";
     sioc:has_container eg_d1:forum;
     assembl:has_origin eg_d1:d1_mailingList1.
 
 eg_d1:message_2 a sioc:Post ;
-    dcterms:title "Telecommuting might help"@eng;
+    dcterms:title "Telecommuting might help"@en;
     sioc:has_creator eg_d1:account_6e5902d716fa578590a0b987c6e82a0249688e36;
     sioc:addressed_to eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
     sioc:has_container eg_d1:forum;
@@ -230,7 +230,7 @@ eg_d1:extracts_4 a oa:SpecificResource;
         a oa:TextPositionSelector;
         oa:start "18"^^xsd:integer;
         oa:end "28"^^xsd:integer;
-        oa:exact "CO2 levels"@eng
+        oa:exact "CO2 levels"@en
     ].
 
 eg_site:annotation_4_target a trig:Graph.
@@ -243,15 +243,15 @@ eg_site:annotation_4_target a trig:Graph.
 # A few ideas.
 
 eg_d1:idea_1 a ibis:Issue;
-    dcterms:title "Stop climate change"@eng;
-    dcterms:description "A longer description "@eng;
+    dcterms:title "Stop climate change"@en;
+    dcterms:description "A longer description "@en;
     sioc:has_creator eg_d1:account_262d2e2ecb6696c0bfdc482ac6273b5b88c56ed2;
     dcterms:created "2013-11-02T14:20:04"^^xsd:dateTime;
     dcterms:modified "2014-01-02T11:32:17"^^xsd:dateTime;
     sioc:has_container <http://www.assembl.net/discussion/1/>.
 
 eg_d1:idea_2 a ibis:Position;
-    dcterms:title "We should telecommute"@eng;
+    dcterms:title "We should telecommute"@en;
     sioc:has_container <http://www.assembl.net/discussion/1/>.
 
 eg_d1:idealink_2_1 a ibis:PositionRespondsToIssue;
@@ -261,7 +261,7 @@ eg_d1:idealink_2_1 a ibis:PositionRespondsToIssue;
 
 eg_d1:idea_3 a ibis:Argument;
     dcterms:title """Personal transport is a big part 
-        of fuel consumption."""@eng;
+        of fuel consumption."""@en;
     sioc:has_container <http://www.assembl.net/discussion/1/>.
 
 eg_d1:idealink_3_2 a ibis:ArgumentSupportsIdea;
