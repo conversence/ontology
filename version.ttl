@@ -13,7 +13,7 @@
 <http://purl.org/catalyst/version#> a owl:Ontology;
     rdfs:comment """Version information should live in another graph than
     the versioned objects. This is mandatory if the version information
-    includes ObjectSnapshot instances."""@eng.
+    includes ObjectSnapshot instances."""@en.
 
 version:Update
     a owl:Class;
@@ -37,14 +37,14 @@ version:revision
     rdfs:domain version:Update;
     rdfs:range xsd:integer;
     rdfs:comment """Changes may optionally have a number.
-    Then, change order must determine History sequence order."""@eng.
+    Then, change order must determine History sequence order."""@en.
 
 version:when
     a owl:DatatypeProperty, owl:FunctionalProperty;
     rdfs:domain version:Update;
     rdfs:range xsd:dateTimeStamp;
     rdfs:comment """Timestamp is mandatory. If present, 
-    revision numbers have precedence over timestamps."""@eng;
+    revision numbers have precedence over timestamps."""@en;
     owl:equivalentProperty tb_change:timeStamp.
 
 version:who
@@ -68,14 +68,14 @@ version:create_from
     a owl:ObjectProperty;
     owl:subPropertyOf dcterms:source;
     rdfs:comment """Objects created through cloning and merging should 
-    retain links to their source using this property."""@eng.
+    retain links to their source using this property."""@en.
 
 version:updated_value a owl:ObjectProperty;
     rdfs:domain version:Update;
     rdfs:range rdf:Statement;
     owl:equivalentProperty cs:statement;
     rdfs:comment """Optional. Updates can have either updated_value
-        or a snapshot (see later.)"""@eng.
+        or a snapshot (see later.)"""@en.
 
 version:values_added a owl:ObjectProperty;
     owl:subPropertyOf version:updated_value;
@@ -101,7 +101,7 @@ version:annotation_target
     rdfs:domain version:Annotate;
     rdfs:comment """Note that the 'what' property refers to the 
         created object, which may be the annotating object 
-        or a link between that object and the annotation target"""@eng.
+        or a link between that object and the annotation target"""@en.
 
 version:StateChange
     a owl:Class;
@@ -117,7 +117,7 @@ version:ClassChange
     a owl:Class;
     owl:subClassOf version:Update;
     rdfs:comment """All updated values objects must be classes. All
-        classes not mentioned in an update value object are erased."""@eng.
+        classes not mentioned in an update value object are erased."""@en.
 
 version:ApprovalChange
     a owl:Class;
@@ -146,7 +146,7 @@ version:Move
     owl:subClassOf version:Update;
     rdfs:comment """Optional. Any move can be expressed as a sequence
         of link delete and creates, even if the links share the
-        same resource identity."""@eng.
+        same resource identity."""@en.
 
 version:old_links
     owl:subPropertyOf version:affected_object;
@@ -162,7 +162,7 @@ version:ObjectSnapshot a owl:Class;
     rdfs:comment """Object snapshots should share the class of the 
         original object, but exist in a different graph. Properties
         of the snapshots would point to the original targets,
-        not to snapshots of the targets."""@eng.
+        not to snapshots of the targets."""@en.
 
 version:Tombstone
     a owl:Class;
@@ -190,7 +190,7 @@ version:previous_snapshot
     a owl:ObjectProperty;
     rdfs:domain version:ObjectSnapshot;
     rdfs:range version:ObjectSnapshot;
-    rdfs:comment "Highly speculative."@eng.
+    rdfs:comment "Highly speculative."@en.
 
 version:tombstone
     a owl:ObjectProperty;

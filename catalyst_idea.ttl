@@ -40,13 +40,13 @@ idea:target_idea
     owl:subPropertyOf idea:relates_idea;
     rdfs:domain idea:DirectedIdeaRelation;
     rdfs:range idea:GenericIdeaNode;
-    rdfs:comment "The destination is the parent"@eng.
+    rdfs:comment "The destination is the parent"@en.
 
 idea:InclusionRelation
     a owl:Class;
     owl:subClassOf idea:DirectedIdeaRelation;
     rdfs:comment """This is a vague subordination property between ideas,
-        as in mind maps and assembl containment."""@eng.
+        as in mind maps and assembl containment."""@en.
 
 idea:includes
     a owl:AsymmetricProperty;
@@ -75,7 +75,7 @@ idea:WholePartRelation
     owl:subClassOf idea:InclusionRelation;
     rdfs:comment """This is strict idea containment. Examples include
         a proposal in many points, or identifying premises in an argument.
-        It may also be applied to Compendium-style maps (TBD.)"""@eng.
+        It may also be applied to Compendium-style maps (TBD.)"""@en.
 
 idea:hasPart
     owl:subPropertyOf idea:includes, dcterms:hasPart;
