@@ -14,7 +14,8 @@ idea:GenericIdea
 
 idea:GenericIdeaNode
     a owl:Class;
-    owl:subClassOf idea:GenericIdea.
+    owl:subClassOf idea:GenericIdea;
+    rdfs:label "generic idea"@en, "idée générique"@fr.
 
 idea:IdeaRelation
     a owl:Class;
