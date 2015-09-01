@@ -13,7 +13,7 @@ dotfiles = ibis.dot version.dot aif.dot vote.dot sioc.dot idea.dot assembl.dot i
 sourcefiles = version.ttl assembl_core.ttl catalyst_idea.ttl AIF-RDF.core.ttl pa_ibis.ttl sioc.ttl foaf.ttl catalyst_ibis.ttl catalyst_vote.ttl catalyst_core.ttl
 pdf_files  := $(subst .dot,.pdf,$(dotfiles))
 
-all: $(dotfiles) example.json
+all: $(dotfiles) example.json ontology.json
 
 clean:
 	rm -f $(dotfiles) $(pdf_files) example.json foaf.ttl pa_ibis.ttl sioc.ttl sioc.rdf.xml foaf.ttl pa_ibis.ttl foaf.rdf.xml
@@ -65,6 +65,10 @@ pdf: $(pdf_files)
 
 %.json: %.trig context.jsonld
 	python save_jsonld.py -c context.jsonld -o $@ $<
+
+ontology.trig:
+	cat catalyst_*.ttl assembl_core.ttl version.ttl > ontology.trig
+
 
 %.ttl: %.rdf.xml
 	rapper -i rdfxml -o turtle $< > $@

@@ -17,6 +17,7 @@
     "vote": "http://purl.org/catalyst/vote#",
     "eg_site": "http://www.assembl.net/",
     "eg_d1": "http://www.assembl.net/discussion/1/",
+    "aif": "http://www.arg.dundee.ac.uk/aif",
 
     "Graph": "trig:Graph",
     
@@ -292,6 +293,16 @@
 
     "sameAs": {"@id": "owl:sameAs", "@type": "@id"},
     "Statement": "rdf:Statement",
+    "Class": {"@id": "owl:Class", "@type": "@id"},
+    "subClassOf": {"@id": "owl:subClassOf", "@type": "@id"},
+    "subPropertyOf": {"@id": "owl:subPropertyOf", "@type": "@id"},
+    "inverseOf": {"@id": "owl:inverseOf", "@type": "@id"},
+
+    "domain": {"@id": "rdfs:domain", "@type": "@id"},
+    "range": {"@id": "rdfs:range", "@type": "@id"},
+    "isDefinedBy": {"@id": "rdfs:isDefinedBy", "@type": "@id"},
+    "label": {"@id": "rdfs:label"},
+    "rdfcomment": {"@id": "rdfs:comment"},
     "subject": {"@id": "rdf:subject", "@type": "@id"},
     "predicate": {"@id": "rdf:predicate", "@type": "@id"},
     "object": {"@id": "rdf:object", "@type": "@id"}

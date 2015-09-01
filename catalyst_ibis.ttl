@@ -43,6 +43,8 @@ ibis:response_position
     rdfs:domain ibis:PositionRespondsToIssue;
     rdfs:range ibis:Position.
 
+# Better idea: use propertychains to deduce a direct link from source to dest, setting range and domain.
+
 ibis:response_issue
     a owl:ObjectProperty;
     rdfs:subPropertyOf idea:target_idea;
