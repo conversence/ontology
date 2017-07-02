@@ -1,7 +1,12 @@
 #!/usr/bin/python
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import next
 from itertools import chain
 import argparse
-from StringIO import StringIO
+from io import StringIO
 
 from pygraphviz import AGraph
 from rdflib import Graph, RDF, OWL, RDFS, BNode, XSD, Namespace
@@ -25,7 +30,7 @@ def normalize_label(s):
 def list_content(rdflist, graph):
     for o in graph.transitive_objects(rdflist, RDF.rest):
         if o != RDF.nil:
-            yield graph.objects(o, RDF.first).next()
+            yield next(graph.objects(o, RDF.first))
 
 
 def convert(graph, desired_ns=[], exclude_ns=[]):
@@ -174,4 +179,4 @@ if __name__ == '__main__':
     if args.output:
         agraph.write(args.output)
     else:
-        print agraph.string().encode('utf-8')
+        print(agraph.string().encode('utf-8'))

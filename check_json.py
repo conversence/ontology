@@ -1,4 +1,5 @@
 #!/usr/bin/python
+from __future__ import print_function
 from argparse import ArgumentParser
 from os.path import join, dirname
 
@@ -20,7 +21,7 @@ ASSEMBL = Namespace('http://purl.org/assembl/core#')
 
 def check_keys(json, context):
     suspicious = set()
-    for key, value in json.iteritems():
+    for key, value in json.items():
         if key[0] == '@':
             assert key[1:] in ('graph', 'id', 'type', 'language', 'context', 'value'), 'unknown @:'+key
             if key == '@context':
@@ -92,9 +93,9 @@ def check_props(g, ontology):
             props[p] = (domain, range_)
         domain, range_ = props[p]
         if domain and not in_range(s, domain):
-            print "Not in domain: ", s, p, o
+            print("Not in domain: ", s, p, o)
         if range_ and not in_range(o, range_):
-            print "Not in range: ", s, p, o
+            print("Not in range: ", s, p, o)
 
 
 if __name__ == '__main__':
@@ -108,9 +109,9 @@ if __name__ == '__main__':
     suspicious = list(check_keys(json, context['@context']))
     suspicious.sort()
     if suspicious:
-        print "Suspicious keys:"
+        print("Suspicious keys:")
         for key in suspicious:
-            print key
+            print(key)
     if args.check_properties:
         from pyld import jsonld
         quads = jsonld.to_rdf('file:'+args.input_fname, {'format': 'application/nquads'})

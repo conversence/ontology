@@ -1,3 +1,4 @@
+from builtins import str
 import sys
 import os
 from os.path import exists, join
@@ -32,14 +33,14 @@ if __name__ == '__main__':
             os.mkdir(dirname)
         with open(join(dirname, 'ontology.po'), 'w') as f:
             for labels in chain(
-                    labelsBySubject.itervalues(),
-                    descriptionsBySubject.itervalues()):
+                    iter(labelsBySubject.values()),
+                    iter(descriptionsBySubject.values())):
                 if 'en' in labels and lang in labels:
                     f.write((u'msgid "%s"\nmsgstr"%s"\n\n' % (
                         labels['en'], labels[lang])).encode('utf-8'))
     c2 = rdflib.Graph()
-    subjects = set(chain(labelsBySubject.iterkeys(),
-                         descriptionsBySubject.iterkeys()))
+    subjects = set(chain(iter(labelsBySubject.keys()),
+                         iter(descriptionsBySubject.keys())))
     for s in subjects:
         label = labelsBySubject[s].get('en', None)
         if label is not None:
