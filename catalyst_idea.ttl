@@ -14,12 +14,12 @@ idea:GenericIdea
 
 idea:GenericIdeaNode
     a owl:Class;
-    owl:subClassOf idea:GenericIdea;
+    rdfs:subClassOf idea:GenericIdea;
     rdfs:label "generic idea"@en, "idée générique"@fr.
 
 idea:IdeaRelation
     a owl:Class;
-    owl:subClassOf idea:GenericIdea.
+    rdfs:subClassOf idea:GenericIdea.
 
 idea:relates_idea
     a owl:ObjectProperty;
@@ -28,24 +28,24 @@ idea:relates_idea
 
 idea:DirectedIdeaRelation
     a owl:Class;
-    owl:subClassOf idea:IdeaRelation .
+    rdfs:subClassOf idea:IdeaRelation .
 
 idea:source_idea
     a owl:ObjectProperty;
-    owl:subPropertyOf idea:relates_idea;
+    rdfs:subPropertyOf idea:relates_idea;
     rdfs:domain idea:DirectedIdeaRelation;
     rdfs:range idea:GenericIdeaNode.
 
 idea:target_idea
     a owl:ObjectProperty;
-    owl:subPropertyOf idea:relates_idea;
+    rdfs:subPropertyOf idea:relates_idea;
     rdfs:domain idea:DirectedIdeaRelation;
     rdfs:range idea:GenericIdeaNode;
     rdfs:comment "The destination is the parent"@en.
 
 idea:InclusionRelation
     a owl:Class;
-    owl:subClassOf idea:DirectedIdeaRelation;
+    rdfs:subClassOf idea:DirectedIdeaRelation;
     rdfs:comment """This is a vague subordination property between ideas,
         as in mind maps and assembl containment."""@en.
 
@@ -73,13 +73,13 @@ idea:includedIn
 
 idea:WholePartRelation
     a owl:Class;
-    owl:subClassOf idea:InclusionRelation;
+    rdfs:subClassOf idea:InclusionRelation;
     rdfs:comment """This is strict idea containment. Examples include
         a proposal in many points, or identifying premises in an argument.
         It may also be applied to Compendium-style maps (TBD.)"""@en.
 
 idea:hasPart
-    owl:subPropertyOf idea:includes, dcterms:hasPart;
+    rdfs:subPropertyOf idea:includes, dcterms:hasPart;
     rdfs:domain idea:GenericIdeaNode;
     rdfs:range idea:GenericIdeaNode;
     owl:propertyChainAxiom (
@@ -89,7 +89,7 @@ idea:hasPart
         ).
 
 idea:isPartOf
-    owl:subPropertyOf idea:includedIn, dcterms:isPartOf;
+    rdfs:subPropertyOf idea:includedIn, dcterms:isPartOf;
     owl:inverseOf idea:hasPart;
     rdfs:domain idea:GenericIdeaNode;
     rdfs:range idea:GenericIdeaNode;
@@ -107,12 +107,12 @@ idea:Question
 
 idea:Map
     a owl:Class;
-    owl:subClassOf idea:GenericIdea.
+    rdfs:subClassOf idea:GenericIdea.
     # Positional. We could just infer from in_map.
 
 idea:inMap
     a owl:ObjectProperty;
-    owl:subPropertyOf idea:includes;
+    rdfs:subPropertyOf idea:includes;
     rdfs:range idea:Map.
     # The map inclusion may not be referenced.
     # Not clear that we need a reified relation here.
@@ -121,4 +121,4 @@ idea:inMap
 
 idea:MutualRelevanceStatement
     a owl:Class;
-    owl:subClassOf idea:IdeaRelation .
+    rdfs:subClassOf idea:IdeaRelation .
