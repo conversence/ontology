@@ -10,7 +10,7 @@
 
 
 dotfiles = ibis.dot version.dot aif.dot vote.dot sioc.dot idea.dot assembl.dot ibis_idea.dot ibis_aif.dot ibis_pa.dot catalyst_core.dot reln_aif.dot reln_pa_ibis.dot
-sourcefiles = version.ttl assembl_core.ttl catalyst_idea.ttl AIF-RDF.core.ttl pa_ibis.ttl sioc.ttl foaf.ttl catalyst_ibis.ttl catalyst_vote.ttl catalyst_core.ttl
+sourcefiles = version.ttl assembl_core.ttl catalyst_idea.ttl cache/AIF-RDF.core.ttl cache/pa_ibis.ttl cache/sioc.ttl cache/foaf.ttl catalyst_ibis.ttl catalyst_vote.ttl catalyst_core.ttl
 pdf_files  := $(subst .dot,.pdf,$(dotfiles))
 
 all: $(dotfiles) example.json ontology.json
@@ -49,10 +49,10 @@ reln_aif.dot: catalyst_aif.ttl $(sourcefiles)
 version.dot: version.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdfs owl --desired_ns version --files $(sourcefiles)
 
-aif.dot: AIF-RDF.core.ttl $(sourcefiles)
+aif.dot: cache/AIF-RDF.core.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns aif --files AIF-RDF.core.ttl
 
-sioc.dot: sioc.ttl $(sourcefiles)
+sioc.dot: cache/sioc.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns sioc --files $(sourcefiles)
 
 ibis_idea.dot: catalyst_idea.ttl $(sourcefiles)

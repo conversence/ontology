@@ -27,7 +27,11 @@ def check_keys(json, context):
             if key == '@context':
                 continue
             if key == '@type':
-                if value not in context:
+                if isinstance(value, list):
+                    for val in value:
+                        if val not in context:
+                            suspicious.add(val)
+                elif value not in context:
                     suspicious.add(value)
         elif ':' in key:
             suspicious.add(key)
@@ -43,18 +47,18 @@ def check_keys(json, context):
     return suspicious
 
 ontology_files = [
-    'rdf-schema.ttl',
-    'owl.ttl',
+    'cache/rdf-schema.ttl',
+    'cache/owl.ttl',
     'assembl_core.ttl',
     'catalyst_aif.ttl',
     'catalyst_core.ttl',
     'catalyst_ibis.ttl',
     'catalyst_idea.ttl',
     'catalyst_vote.ttl',
-    'dcterms.ttl',
-    'foaf.ttl',
-    'openannotation.ttl',
-    'sioc.ttl',
+    'cache/dcterms.ttl',
+    'cache/foaf.ttl',
+    'cache/openannotation.ttl',
+    'cache/sioc.ttl',
     'version.ttl']
 
 def load_ontology():
