@@ -50,7 +50,7 @@ version.dot: version.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdfs owl --desired_ns version --files $(sourcefiles)
 
 aif.dot: cache/AIF-RDF.core.ttl $(sourcefiles)
-	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns aif --files AIF-RDF.core.ttl
+	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns aif --files cache/AIF-RDF.core.ttl
 
 sioc.dot: cache/sioc.ttl $(sourcefiles)
 	python rdf2dot.py --output $@ --exclude_ns xsd rdf rdfs owl --desired_ns sioc --files $(sourcefiles)
