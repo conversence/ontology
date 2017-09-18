@@ -43,22 +43,22 @@ situation:expected_outcome
 
 situation:ConcreteSituation
     a owl:Class;
-    rdfs:subClassOf situation:Situation;
+    rdfs:subClassOf situation:Situation.
 
 situation:KnownExampleSituation
     a owl:Class;
-    rdfs:subClassOf idea:specializes;
+    rdfs:subClassOf idea:specializes.
 
 situation:abstract_situation
     a owl:ObjectProperty;
     rdfs:subPropertyOf idea:source_idea;
-    rdfs:domain KnownExampleSituation;
+    rdfs:domain situation:KnownExampleSituation;
     rdfs:range situation:Situation.
 
 situation:concrete_example
     a owl:ObjectProperty;
     rdfs:subPropertyOf idea:target_idea;
-    rdfs:domain KnownExampleSituation;
+    rdfs:domain situation:KnownExampleSituation;
     rdfs:range situation:ConcreteSituation.
 
 situation:EvaluateRegardingIssue
