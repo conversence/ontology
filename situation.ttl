@@ -1,0 +1,78 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix pa_ibis: <http://privatealpha.com/ontology/ibis/1#> .
+@prefix aif: <http://www.arg.dundee.ac.uk/aif#> .
+@prefix idea: <http://purl.org/catalyst/idea#> .
+@prefix catalyst: <http://purl.org/catalyst/core#> .
+@prefix ibis: <http://purl.org/catalyst/ibis#> .
+@prefix situation: <http://purl.org/conversence/situation#> .
+
+<http://purl.org/conversence/situation#> a owl:Ontology.
+
+situation:Situation
+    a owl:Class;
+    rdfs:subClassOf ibis:GenericIdeaNode.
+
+situation:Initiative
+    a owl:Class;
+    rdfs:subClassOf ibis:Position, situation:Situation.
+
+situation:Evaluation
+    a owl:Class;
+    rdfs:subClassOf ibis:Argument.
+
+situation:ExpectedOutcome
+    a owl:Class;
+    rdfs:subClassOf idea:DirectedIdeaRelation, idea:CausalInference.
+
+situation:initial_situation
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:source_idea;
+    rdfs:domain situation:ExpectedOutcome;
+    rdfs:range situation:Situation.
+
+situation:expected_outcome
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:target_idea;
+    rdfs:domain situation:ExpectedOutcome;
+    rdfs:range situation:Situation.
+
+situation:ConcreteSituation
+    a owl:Class;
+    rdfs:subClassOf situation:Situation;
+
+situation:KnownExampleSituation
+    a owl:Class;
+    rdfs:subClassOf idea:specializes;
+
+situation:abstract_situation
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:source_idea;
+    rdfs:domain KnownExampleSituation;
+    rdfs:range situation:Situation.
+
+situation:concrete_example
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:target_idea;
+    rdfs:domain KnownExampleSituation;
+    rdfs:range situation:ConcreteSituation.
+
+situation:EvaluateRegardingIssue
+    a owl:Class;
+    rdfs:subClassOf idea:DirectedIdeaRelation, idea:MutualRelevanceStatement.
+
+situation:evaluates_situation
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:source_idea;
+    rdfs:domain situation:EvaluateRegardingIssue;
+    rdfs:range situation:Situation.
+
+situation:regarding_issue
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:target_idea;
+    rdfs:domain situation:EvaluateRegardingIssue;
+    rdfs:range ibis:Issue.

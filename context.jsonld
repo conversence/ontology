@@ -11,6 +11,7 @@
     "oa": "http://www.openannotation.org/ns/",
     "idea": "http://purl.org/catalyst/idea#",
     "ibis": "http://purl.org/catalyst/ibis#",
+    "situation": "http://purl.org/conversence/situation#",
     "assembl": "http://purl.org/assembl/core#",
     "catalyst": "http://purl.org/catalyst/core#",
     "version": "http://purl.org/catalyst/version#",
@@ -20,7 +21,7 @@
     "aif": "http://www.arg.dundee.ac.uk/aif",
 
     "Graph": "trig:Graph",
-    
+
     "title": "dcterms:title",
     "alternative": "dcterms:alternative",
     "dclanguage": "dcterms:language",
@@ -86,6 +87,20 @@
     "response_issue": {"@id": "ibis:response_issue", "@type": "@id"},
     "response_position": {"@id": "ibis:response_position", "@type": "@id"},
     "applicable_issue": {"@id": "ibis:applicable_issue", "@type": "@id"},
+
+    "Situation": situation:Situation",
+    "Initiative": situation:Initiative",
+    "Evaluation": situation:Evaluation",
+    "ExpectedOutcome": situation:ExpectedOutcome",
+    "KnownExampleSituation": situation:KnownExampleSituation",
+    "EvaluateRegardingIssue": situation:EvaluateRegardingIssue",
+    "ConcreteSituation": situation:ConcreteSituation",
+    "initial_situation": {"@id": "situation:initial_situation", "@type": "@id"},
+    "expected_outcome": {"@id": "situation:expected_outcome", "@type": "@id"},
+    "abstract_situation": {"@id": "situation:abstract_situation", "@type": "@id"},
+    "concrete_example": {"@id": "situation:concrete_example", "@type": "@id"},
+    "evaluates_situation": {"@id": "situation:evaluates_situation", "@type": "@id"},
+    "regarding_issue": {"@id": "situation:regarding_issue", "@type": "@id"},
 
     "Person": "foaf:Person",
     "Agent": "foaf:Agent",
