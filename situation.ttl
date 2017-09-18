@@ -1,13 +1,6 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix pa_ibis: <http://privatealpha.com/ontology/ibis/1#> .
-@prefix aif: <http://www.arg.dundee.ac.uk/aif#> .
 @prefix idea: <http://purl.org/catalyst/idea#> .
-@prefix catalyst: <http://purl.org/catalyst/core#> .
 @prefix ibis: <http://purl.org/catalyst/ibis#> .
 @prefix situation: <http://purl.org/conversence/situation#> .
 
@@ -15,7 +8,7 @@
 
 situation:Situation
     a owl:Class;
-    rdfs:subClassOf ibis:GenericIdeaNode.
+    rdfs:subClassOf idea:GenericIdeaNode.
 
 situation:Initiative
     a owl:Class;
