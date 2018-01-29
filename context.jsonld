@@ -310,6 +310,7 @@
     "Statement": "rdf:Statement",
     "Class": {"@id": "owl:Class", "@type": "@id"},
     "inverseOf": {"@id": "owl:inverseOf", "@type": "@id"},
+    "Property": "rdf:Property",
 
     "subClassOf": {"@id": "rfds:subClassOf", "@type": "@id"},
     "subPropertyOf": {"@id": "rdfs:subPropertyOf", "@type": "@id"},
