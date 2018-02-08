@@ -5,7 +5,7 @@ from argparse import ArgumentParser, FileType
 import simplejson as json
 from rdflib import ConjunctiveGraph
 
-context_url = 'http://purl.org/catalyst/jsonld'
+context_url = 'http://purl.org/conversence/jsonld'
 
 
 def convert(context, input, output, input_format):
