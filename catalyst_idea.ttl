@@ -10,42 +10,51 @@
 <http://purl.org/catalyst/idea#> a owl:Ontology.
 
 idea:GenericIdea
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     a owl:Class.
 
 idea:GenericIdeaNode
     a owl:Class;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subClassOf idea:GenericIdea;
     rdfs:label "generic idea"@en, "idée générique"@fr.
 
 idea:IdeaRelation
     a owl:Class;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subClassOf idea:GenericIdea.
 
 idea:RelationRole
     a owl:Class;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subClassOf owl:ObjectProperty.
 
 idea:relates_idea
     a idea:RelationRole, owl:ObjectProperty;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:domain idea:IdeaRelation;
     rdfs:range idea:GenericIdeaNode.
 
 idea:BinaryIdeaRelation
     a owl:Class;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subClassOf idea:IdeaRelation .
 
 idea:DirectedIdeaRelation
     a owl:Class;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subClassOf idea:BinaryIdeaRelation .
 
 idea:source_idea
     a idea:RelationRole, owl:ObjectProperty;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subPropertyOf idea:relates_idea;
     rdfs:domain idea:DirectedIdeaRelation;
     rdfs:range idea:GenericIdeaNode.
 
 idea:target_idea
     a idea:RelationRole, owl:ObjectProperty;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subPropertyOf idea:relates_idea;
     rdfs:domain idea:DirectedIdeaRelation;
     rdfs:range idea:GenericIdeaNode;
@@ -53,12 +62,14 @@ idea:target_idea
 
 idea:InclusionRelation
     a owl:Class;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subClassOf idea:DirectedIdeaRelation;
     rdfs:comment """This is a vague subordination property between ideas,
         as in mind maps and assembl containment."""@en.
 
 idea:includes
     a owl:AsymmetricProperty, owl:ObjectProperty;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:domain idea:GenericIdeaNode;
     rdfs:range idea:GenericIdeaNode;
     owl:propertyChainAxiom (
@@ -70,6 +81,7 @@ idea:includes
 
 idea:includedIn
     a owl:AsymmetricProperty, owl:ObjectProperty;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     owl:inverseOf idea:includes;
     rdfs:domain idea:GenericIdeaNode;
     rdfs:range idea:GenericIdeaNode;
@@ -80,8 +92,8 @@ idea:includedIn
         ).
 
 idea:WholePartRelation
-    a owl:ObjectProperty;
-    a owl:Class;
+    a owl:ObjectProperty, owl:Class;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subClassOf idea:InclusionRelation;
     rdfs:comment """This is strict idea containment. Examples include
         a proposal in many points, or identifying premises in an argument.
@@ -89,6 +101,7 @@ idea:WholePartRelation
 
 idea:hasPart
     a owl:ObjectProperty;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subPropertyOf idea:includes, dcterms:hasPart;
     rdfs:domain idea:GenericIdeaNode;
     rdfs:range idea:GenericIdeaNode;
@@ -100,6 +113,7 @@ idea:hasPart
 
 idea:isPartOf
     a owl:ObjectProperty;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subPropertyOf idea:includedIn, dcterms:isPartOf;
     owl:inverseOf idea:hasPart;
     rdfs:domain idea:GenericIdeaNode;
@@ -112,17 +126,20 @@ idea:isPartOf
 
 idea:Question
     a owl:Class;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subClassOf idea:DirectedIdeaRelation.
 
 #map 
 
 idea:Map
     a owl:Class;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subClassOf idea:GenericIdea.
     # Positional. We could just infer from in_map.
 
 idea:inMap
     a owl:ObjectProperty;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subPropertyOf idea:includes;
     rdfs:range idea:Map.
     # The map inclusion may not be referenced.
@@ -132,4 +149,5 @@ idea:inMap
 
 idea:MutualRelevanceStatement
     a owl:Class;
+    rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subClassOf idea:IdeaRelation .
