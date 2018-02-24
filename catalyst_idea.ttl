@@ -21,23 +21,31 @@ idea:IdeaRelation
     a owl:Class;
     rdfs:subClassOf idea:GenericIdea.
 
+idea:RelationRole
+    a owl:Class;
+    rdfs:subClassOf owl:ObjectProperty.
+
 idea:relates_idea
-    a owl:ObjectProperty;
+    a idea:RelationRole, owl:ObjectProperty;
     rdfs:domain idea:IdeaRelation;
     rdfs:range idea:GenericIdeaNode.
 
-idea:DirectedIdeaRelation
+idea:BinaryIdeaRelation
     a owl:Class;
     rdfs:subClassOf idea:IdeaRelation .
 
+idea:DirectedIdeaRelation
+    a owl:Class;
+    rdfs:subClassOf idea:BinaryIdeaRelation .
+
 idea:source_idea
-    a owl:ObjectProperty;
+    a idea:RelationRole, owl:ObjectProperty;
     rdfs:subPropertyOf idea:relates_idea;
     rdfs:domain idea:DirectedIdeaRelation;
     rdfs:range idea:GenericIdeaNode.
 
 idea:target_idea
-    a owl:ObjectProperty;
+    a idea:RelationRole, owl:ObjectProperty;
     rdfs:subPropertyOf idea:relates_idea;
     rdfs:domain idea:DirectedIdeaRelation;
     rdfs:range idea:GenericIdeaNode;
@@ -50,7 +58,7 @@ idea:InclusionRelation
         as in mind maps and assembl containment."""@en.
 
 idea:includes
-    a owl:AsymmetricProperty;
+    a owl:AsymmetricProperty, owl:ObjectProperty;
     rdfs:domain idea:GenericIdeaNode;
     rdfs:range idea:GenericIdeaNode;
     owl:propertyChainAxiom (
@@ -61,7 +69,7 @@ idea:includes
 
 
 idea:includedIn
-    a owl:AsymmetricProperty;
+    a owl:AsymmetricProperty, owl:ObjectProperty;
     owl:inverseOf idea:includes;
     rdfs:domain idea:GenericIdeaNode;
     rdfs:range idea:GenericIdeaNode;
@@ -72,6 +80,7 @@ idea:includedIn
         ).
 
 idea:WholePartRelation
+    a owl:ObjectProperty;
     a owl:Class;
     rdfs:subClassOf idea:InclusionRelation;
     rdfs:comment """This is strict idea containment. Examples include
@@ -79,6 +88,7 @@ idea:WholePartRelation
         It may also be applied to Compendium-style maps (TBD.)"""@en.
 
 idea:hasPart
+    a owl:ObjectProperty;
     rdfs:subPropertyOf idea:includes, dcterms:hasPart;
     rdfs:domain idea:GenericIdeaNode;
     rdfs:range idea:GenericIdeaNode;
@@ -89,6 +99,7 @@ idea:hasPart
         ).
 
 idea:isPartOf
+    a owl:ObjectProperty;
     rdfs:subPropertyOf idea:includedIn, dcterms:isPartOf;
     owl:inverseOf idea:hasPart;
     rdfs:domain idea:GenericIdeaNode;
