@@ -87,3 +87,11 @@ ibis:applicable_issue
 ibis:IssueQuestions
     a owl:Class;
     rdfs:subClassOf ibis:IssueAppliesTo.
+
+[] a owl:AllDisjointClasses ;
+     owl:members  (
+        ibis:Position ibis:Issue ibis:Argument ibis:Reference ibis:PositionRespondsToIssue
+        ibis:ArgumentApplication ibis:IssueAppliesTo ibis:PositionRespondsToIssue ) .
+
+[] a owl:AllDisjointClasses ;
+     owl:members  ( ibis:ArgumentSupportsIdea ibis:ArgumentOpposesIdea ) .
