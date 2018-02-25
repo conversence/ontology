@@ -141,6 +141,7 @@ idea:inMap
     a owl:ObjectProperty;
     rdfs:isDefinedBy <http://purl.org/catalyst/idea#>;
     rdfs:subPropertyOf idea:includes;
+    rdfs:domain idea:GenericIdea;
     rdfs:range idea:Map.
     # The map inclusion may not be referenced.
     # Not clear that we need a reified relation here.
