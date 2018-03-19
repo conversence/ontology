@@ -1,0 +1,154 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix topic: <http://purl.org/conversence/topic#> .
+@prefix ibis: <http://purl.org/conversence/ibis#> .
+@prefix eg: <http://example.com/#> .
+
+
+# Lower ontology
+
+<http://purl.org/conversence/ibis#> a topic:TopicMapApplication.
+
+ibis:Issue
+    a topic:TopicClass;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>.
+
+ibis:Position
+    a topic:TopicClass;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>.
+
+ibis:Argument
+    a topic:TopicClass;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>.
+
+ibis:Reference
+    a topic:TopicClass;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>.
+
+ibis:Decision
+    rdfs:subClassOf ibis:Position;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>.
+
+ibis:PositionRespondsToIssue
+    a topic:StrictBinaryRelation;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>;
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:onProperty ibis:response_position;
+        owl:cardinality  "1"^^xsd:nonNegativeInteger
+    ],
+    [
+        a owl:Restriction;
+        owl:onProperty ibis:response_issue;
+        owl:cardinality  "1"^^xsd:nonNegativeInteger
+    ].
+    # TODO: Deduct those restrictions
+
+ibis:response_position
+    a owl:ObjectProperty, topic:MandatoryRoleDefinition;
+    rdfs:subPropertyOf topic:sourceRole;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>;
+    rdfs:domain ibis:PositionRespondsToIssue;
+    rdfs:range ibis:Position.
+
+ibis:response_issue
+    a owl:ObjectProperty, topic:MandatoryRoleDefinition;
+    rdfs:subPropertyOf topic:targetRole;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>;
+    rdfs:domain ibis:PositionRespondsToIssue;
+    rdfs:range ibis:Issue.
+
+ibis:ArgumentApplication
+    a topic:StrictBinaryRelation;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>;
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:onProperty ibis:argument_arguing;
+        owl:cardinality  "1"^^xsd:nonNegativeInteger
+    ],
+    [
+        a owl:Restriction;
+        owl:onProperty ibis:argument_applies_to;
+        owl:cardinality  "1"^^xsd:nonNegativeInteger
+    ].
+    # TODO: Deduct those restrictions
+
+ibis:argument_arguing
+    a owl:ObjectProperty, topic:MandatoryRoleDefinition;
+    rdfs:subPropertyOf topic:sourceRole;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>;
+    rdfs:domain ibis:ArgumentApplication;
+    rdfs:range ibis:Argument.
+
+ibis:argument_applies_to
+    a owl:ObjectProperty, topic:MandatoryRoleDefinition;
+    rdfs:subPropertyOf topic:targetRole;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>;
+    rdfs:domain ibis:ArgumentApplication;
+    rdfs:range ibis:Position.
+
+ibis:ArgumentSupportsIdea
+    rdfs:subClassOf ibis:ArgumentApplication;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>.
+
+ibis:ArgumentOpposesIdea
+    rdfs:subClassOf ibis:ArgumentApplication;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>.
+
+ibis:IssueAppliesTo
+    a topic:StrictBinaryRelation;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>;
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:onProperty ibis:applicable_issue;
+        owl:cardinality  "1"^^xsd:nonNegativeInteger
+    ],
+    [
+        a owl:Restriction;
+        owl:onProperty ibis:issue_applied_to;
+        owl:cardinality  "1"^^xsd:nonNegativeInteger
+    ].
+    # TODO: Deduct those restrictions
+
+ibis:applicable_issue
+    a owl:ObjectProperty, topic:MandatoryRoleDefinition;
+    rdfs:subPropertyOf topic:sourceRole;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>;
+    rdfs:domain ibis:IssueAppliesTo;
+    rdfs:range ibis:Issue.
+
+ibis:issue_applied_to
+    a owl:ObjectProperty, topic:MandatoryRoleDefinition;
+    rdfs:subPropertyOf topic:targetRole;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>;
+    rdfs:domain ibis:IssueAppliesTo;
+    rdfs:range [owl:unionOf (ibis:Argument ibis:Position)].
+
+ibis:IssueQuestions
+    rdfs:subClassOf ibis:IssueAppliesTo;
+    rdfs:isDefinedBy <http://purl.org/conversence/ibis#>.
+
+[] a owl:AllDisjointClasses ;
+     owl:members  (
+        ibis:Position ibis:Issue ibis:Argument ibis:Reference
+        ibis:ArgumentApplication ibis:IssueAppliesTo ibis:PositionRespondsToIssue ) .
+
+[] a owl:AllDisjointClasses ;
+     owl:members  ( ibis:ArgumentSupportsIdea ibis:ArgumentOpposesIdea ) .
+
+# Example
+
+eg:abc a ibis:Issue; dcterms:title "We need a simple format for types"@en.
+eg:def a ibis:Position; dcterms:title "We prefer a JSON-based format"@en.
+
+[] a owl:AllDifferent ;
+     owl:distinctMembers  ( eg:abc eg:def eg:klm ) .
+
+
+eg:ghi a ibis:PositionRespondsToIssue;
+    ibis:responds_to_issue eg:abc;
+    ibis:proposal_responding eg:def.
+

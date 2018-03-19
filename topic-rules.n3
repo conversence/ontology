@@ -1,0 +1,31 @@
+<> <#rcsid> "$Id: topic-rules.n3 2865 2018-02-23 18:28:02Z maparent $".
+
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix topic: <http://purl.org/conversence/topic#> .
+@prefix : <http://purl.org/conversence/topic-rules#> .
+
+topic:Topic a owl:Class.
+
+topic:TopicClass
+    a owl:Class, topic:Topic;
+    rdfs:subClassOf owl:Class.
+
+topic:Relation
+    a owl:Class;
+    rdfs:subClassOf topic:TopicClass.
+
+topic:RoleDefinition
+    a owl:Class;
+    rdfs:subClassOf topic:TopicClass, owl:ObjectProperty, owl:FunctionalProperty.
+
+topic:MandatoryRoleDefinition
+    a owl:Class;
+    rdfs:subClassOf topic:RoleDefinition.
+
+{?C a topic:TopicClass} => {?C rdfs:subClassOf topic:Topic}.
+
+{?S a topic:Relation. ?R a topic:MandatoryRoleDefinition; rdfs:domain ?S. } => {?S rdfs:subClassOf [
+        a owl:Restriction; owl:onProperty ?R; owl:cardinality  "1"^^xsd:nonNegativeInteger ]}.
+

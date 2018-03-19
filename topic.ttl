@@ -1,0 +1,106 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix topic: <http://purl.org/conversence/topic#> .
+
+# Upper ontology
+
+<http://purl.org/conversence/topic#> a owl:Ontology.
+
+topic:Topic
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    a owl:Class;
+    rdfs:subClassOf owl:Thing.
+
+topic:TopicClass
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    a topic:Topic;
+    rdfs:subClassOf owl:Class.
+# TODO: {?C a topic:TopicClass} => {?C rdfs:subClassOf topic:Topic}.
+
+topic:Relation
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    a owl:Class;
+    rdfs:subClassOf topic:TopicClass.
+
+topic:StrictNodeClass
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    owl:equivalentClass [
+        a owl:Class;
+        rdfs:subClassOf topic:TopicClass;
+        owl:intersectionOf (
+            topic:TopicClass
+            [a owl:Class; owl:complementOf topic:Relation]
+        )
+    ].
+
+topic:RoleDefinition
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    a owl:Class;
+    rdfs:subClassOf topic:TopicClass, owl:ObjectProperty, owl:FunctionalProperty, [
+        a owl:Restriction;
+        owl:onProperty rdfs:domain;
+        owl:allValuesFrom topic:Relation;
+    ],
+    [
+        a owl:Restriction;
+        owl:onProperty rdfs:range;
+        owl:allValuesFrom topic:TopicClass;
+    ].
+
+topic:MandatoryRoleDefinition
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    a owl:Class;
+    rdfs:subClassOf topic:RoleDefinition.
+    # TODO: {?S a topic:Relation. ?R a topic:MandatoryRoleDefinition; rdfs:domain ?S. } => {?S rdfs:subClassOf [
+    #    a owl:Restriction; owl:onProperty ?R; owl:cardinality  "1"^^xsd:nonNegativeInteger ]}.
+
+topic:sourceRole
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    a owl:ObjectProperty, topic:MandatoryRoleDefinition. # , owl:Class, topic:Topic.
+
+topic:targetRole
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    a owl:ObjectProperty, topic:MandatoryRoleDefinition. # , owl:Class, topic:Topic.
+
+topic:BinaryRelation
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    rdfs:subClassOf topic:Relation,
+    [
+        a owl:Restriction;
+        owl:onProperty topic:sourceRole;
+        owl:cardinality  "1"^^xsd:nonNegativeInteger
+    ],
+    [
+        a owl:Restriction;
+        owl:onProperty topic:targetRole;
+        owl:cardinality  "1"^^xsd:nonNegativeInteger
+    ].
+    # TODO: Express these restrictions as a property of the MandatoryRoleDefinition
+
+topic:sourceRole rdfs:domain topic:BinaryRelation.
+
+topic:targetRole rdfs:domain topic:BinaryRelation.
+
+topic:StrictRelation
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    rdfs:subClassOf topic:Relation,
+    [
+            a owl:Restriction;
+            owl:onProperty topic:RoleDefinition;
+            owl:allValuesFrom topic:StrictNodeClass;
+    ].
+
+topic:StrictBinaryRelation
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    a owl:Class;
+    rdfs:subClassOf topic:BinaryRelation, topic:StrictRelation.
+
+topic:TopicMapApplication
+    rdfs:isDefinedBy <http://purl.org/conversence/topic#>;
+    a owl:Class;
+    rdfs:subClassOf owl:Ontology.
+
