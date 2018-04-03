@@ -8,7 +8,7 @@
     "foaf": "http://xmlns.com/foaf/0.1/",
     "dcterms": "http://purl.org/dc/terms/",
     "sioc": "http://rdfs.org/sioc/ns#",
-    "oa": "http://www.openannotation.org/ns/",
+    "oa": "http://www.w3.org/ns/oa#",
     "idea": "http://purl.org/catalyst/idea#",
     "ibis": "http://purl.org/catalyst/ibis#",
     "situation": "http://purl.org/conversence/situation#",
@@ -254,8 +254,7 @@
     "hasSelector": {"@id": "oa:hasSelector", "@type": "@id"},
     "hasSource": {"@id": "oa:hasSource", "@type": "@id"},
     "hasTarget": {"@id": "oa:hasTarget", "@type": "@id"},
-    "annotatedAt": {"@id": "oa:annotatedAt", "@type":"xsd:dateTime"},
-    "serializedBy": {"@id": "oa:serializedBy", "@type":"@id"},
+    "annotatedAt": {"@id": "dcterms:created", "@type":"xsd:dateTime"},
 
     "BinaryVote": "vote:BinaryVote",
     "LickertRange": "vote:LickertRange",
