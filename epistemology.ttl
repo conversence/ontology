@@ -1,0 +1,71 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix idea: <http://purl.org/catalyst/idea#> .
+@prefix ibis: <http://purl.org/catalyst/ibis#> .
+@prefix epistemology: <http://purl.org/conversence/epistemology#> .
+
+<http://purl.org/conversence/epistemology#> a owl:Ontology.
+
+epistemology:Claim
+    a owl:Class;
+    rdfs:subClassOf ibis:Position.
+
+epistemology:Data
+    a owl:Class;
+    rdfs:subClassOf ibis:Reference.
+
+epistemology:Interpretation
+    a owl:Class;
+    rdfs:subClassOf ibis:Argument.
+
+epistemology:Interpretation
+    a owl:Class;
+    rdfs:subClassOf ibis:Argument.
+
+
+epistemology:EpistemologicalCriterion
+    a owl:Class;
+    rdfs:subClassOf idea:Argument.
+
+epistemology:Paradigm
+    a owl:Class;
+    rdfs:subClassOf idea:GenericIdeaNode.
+
+
+epistemology:inParadigm
+    a owl:Class;
+    rdfs:subClassOf idea:DirectedIdeaRelation, idea:MutualRelevanceStatement.
+
+
+epistemology:inParadigm_source
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:source_idea;
+    rdfs:domain epistemology:inParadigm;
+    rdfs:range epistemology:EpistemologicalCriterion.
+
+
+epistemology:inParadigm_target
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:target_idea;
+    rdfs:domain epistemology:inParadigm;
+    rdfs:range epistemology:Paradigm.
+
+
+
+epistemology:interpretationOf
+    a owl:Class;
+    rdfs:subClassOf idea:DirectedIdeaRelation, idea:MutualRelevanceStatement.
+
+
+epistemology:interpretationOf_source
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:source_idea;
+    rdfs:domain epistemology:interpretationOf;
+    rdfs:range epistemology:interpretation.
+
+
+epistemology:interpretationOf_target
+    a owl:ObjectProperty;
+    rdfs:subPropertyOf idea:target_idea;
+    rdfs:domain epistemology:interpretationOf;
+    rdfs:range epistemology:Data.
