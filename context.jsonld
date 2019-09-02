@@ -103,18 +103,18 @@
     "evaluates_situation": {"@id": "situation:evaluates_situation", "@type": "@id"},
     "regarding_issue": {"@id": "situation:regarding_issue", "@type": "@id"},
 
-    "Claim": "epistemology:Claim"
-    "Data": "epistemology:Data"
-    "Interpretation": "epistemology:Interpretation"
-    "Interpretation": "epistemology:Interpretation"
-    "EpistemologicalCriterion": "epistemology:EpistemologicalCriterion"
-    "Paradigm": "epistemology:Paradigm"
-    "inParadigm": "epistemology:inParadigm"
-    "inParadigm_source": {"epistemology:inParadigm_source", "@type": "@id"}
-    "inParadigm_target": {"epistemology:inParadigm_target", "@type": "@id"}
-    "interpretationOf": {"epistemology:interpretationOf", "@type": "@id"}
-    "interpretationOf_source": {"epistemology:interpretationOf_source", "@type": "@id"}
-    "interpretationOf_target": {"epistemology:interpretationOf_target", "@type": "@id"}
+    "Claim": "epistemology:Claim",
+    "Data": "epistemology:Data",
+    "Interpretation": "epistemology:Interpretation",
+    "Interpretation": "epistemology:Interpretation",
+    "EpistemologicalCriterion": "epistemology:EpistemologicalCriterion",
+    "Paradigm": "epistemology:Paradigm",
+    "inParadigm": "epistemology:inParadigm",
+    "inParadigm_source": {"@id": "epistemology:inParadigm_source", "@type": "@id"},
+    "inParadigm_target": {"@id": "epistemology:inParadigm_target", "@type": "@id"},
+    "interpretationOf": {"@id": "epistemology:interpretationOf", "@type": "@id"},
+    "interpretationOf_source": {"@id": "epistemology:interpretationOf_source", "@type": "@id"},
+    "interpretationOf_target": {"@id": "epistemology:interpretationOf_target", "@type": "@id"},
 
     "Person": "foaf:Person",
     "Agent": "foaf:Agent",
